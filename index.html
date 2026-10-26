@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MP Serviços — Central Digital</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--azul:#F4F6F8;--azul2:#4F7FB3;--azul3:#4F7FB3;--azul4:#9FB9D9;--grafite:#333333;--cinza:#9AA3A8;--nevoa:rgba(79,127,179,.32);--base:#0F2233;--branco:#1F3F5B}
+html,body{min-height:100%;background:var(--base);color:var(--azul);font-family:Montserrat,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+body{position:relative;overflow-x:hidden;padding:0}
+.mod{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:radial-gradient(circle at 50% 0%,rgba(46,90,136,.28),transparent 60%),linear-gradient(rgba(79,127,179,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(79,127,179,.035) 1px,transparent 1px);background-size:auto,12mm 12mm,12mm 12mm;opacity:.75}
+.wrap{position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:20mm 8mm 16mm}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16mm;padding:14px 0;border-bottom:1px solid var(--nevoa)}
+.lockup{display:flex;align-items:center;gap:5mm}
+.logo-halo{position:relative;width:56px;height:56px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-halo::before{content:"";position:absolute;inset:-14px;background:radial-gradient(circle,rgba(79,127,179,.55) 0%,rgba(79,127,179,.18) 45%,transparent 75%);border-radius:50%;z-index:0;pointer-events:none}
+.logo-halo img{width:100%;height:100%;object-fit:contain;position:relative;z-index:1;filter:drop-shadow(0 0 8px rgba(79,127,179,.6)) brightness(1.1)}
+.brand-text{display:flex;flex-direction:column;line-height:1.2;color:var(--branco);font-weight:700;font-size:16px}
+.brand-text small{font-size:11px;color:var(--azul3);font-weight:600;letter-spacing:1.5px}
+.sym{width:22mm;height:22mm;display:block}
+.wm{font-family:Montserrat,Arial,sans-serif;font-weight:900;color:var(--azul);line-height:.95;text-transform:uppercase}
+.wm .l1,.wm .l2{display:block;font-size:18pt;letter-spacing:.1em}
+.wm .bar{display:block;width:12mm;height:1.2mm;background:var(--azul2);margin:3mm 0 2mm}
+.wm small{display:block;font-family:Montserrat,Arial,sans-serif;font-weight:700;font-size:7pt;letter-spacing:.12em;color:var(--cinza)}
+.badge{border:.3mm solid var(--azul2);border-radius:99mm;padding:2mm 5mm;font-size:7.5pt;letter-spacing:.2em;text-transform:uppercase;color:var(--azul2);font-weight:700}
+.kicker{display:flex;align-items:center;gap:3mm;font-size:8pt;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--azul2);margin-bottom:5mm}
+.kicker::before{content:"";width:9mm;height:1.2mm;background:var(--azul2)}
+h1{font-family:Montserrat,Arial,sans-serif;font-weight:900;text-transform:uppercase;font-size:34pt;line-height:1;letter-spacing:-.01em;color:var(--azul);margin-bottom:5mm}
+h1 span{color:var(--azul2)}
+.sub{font-size:12pt;color:var(--cinza);max-width:170mm;line-height:1.5;margin-bottom:14mm}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5mm}
+.card{display:block;text-decoration:none;background:rgba(31,63,91,.78);border:1px solid var(--nevoa);border-radius:4mm;padding:7mm 6mm;position:relative;transition:transform .2s,border-color .2s,box-shadow .2s;overflow:hidden;min-height:66mm}
+.card:hover{transform:translateY(-2px);border-color:var(--azul2);box-shadow:0 8px 24px rgba(15,34,51,.1)}
+.card .num{position:absolute;top:5mm;right:6mm;font-family:Montserrat,Arial,sans-serif;font-weight:900;font-size:26pt;color:var(--azul);opacity:.10;line-height:1}
+.card .ico{width:12mm;height:12mm;margin-bottom:7mm;color:var(--azul2)}
+.card h3{font-family:Montserrat,Arial,sans-serif;font-weight:900;font-size:13pt;text-transform:uppercase;color:var(--azul);margin-bottom:3mm;line-height:1.15}
+.card h3::after{content:"";display:block;width:10mm;height:1.1mm;background:var(--azul2);margin-top:3mm}
+.card p{font-size:9.5pt;line-height:1.55;color:var(--cinza);margin-top:3mm}
+.card .go{margin-top:6mm;display:inline-flex;align-items:center;gap:2mm;font-size:8pt;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--azul2)}
+.card .go svg{width:4mm;height:4mm;transition:transform .2s}
+.card:hover .go svg{transform:translateX(2mm)}
+.foot{margin-top:16mm;padding-top:5mm;border-top:1px solid var(--nevoa);display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:8pt;letter-spacing:.1em;text-transform:uppercase;color:var(--cinza)}
+.footer-lockup{display:flex;align-items:center;gap:10px}.footer-lockup .logo-halo{width:40px;height:40px}.footer-lockup b{font-family:Montserrat,Arial,sans-serif;font-weight:700;color:var(--branco);font-size:12px;letter-spacing:.02em}
+.foot b{font-family:Montserrat,Arial,sans-serif;font-weight:900;color:var(--azul);font-size:9pt;letter-spacing:.02em}
+.foot b i{font-style:normal;color:var(--azul2)}
+@media (max-width:1100px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:650px){.grid{grid-template-columns:1fr}.wrap{padding:14mm 6mm}h1{font-size:26pt}.top{align-items:flex-start;gap:5mm;flex-wrap:wrap}.badge{margin-left:auto}}
+</style>
+</head>
+<body>
+<div class="mod"></div>
+<!-- Biblioteca padrão MP: ícones Lucide em SVG inline; traço 1.8, cantos arredondados, currentColor. Reutilizar estes símbolos nos módulos manual, portfólio, proposta e currículo. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18V5a2 2 0 0 1 2-2h4a3 3 0 0 1 3 3 3 3 0 0 1 3-3h4a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2h-5a2 2 0 0 0-2 2 2 2 0 0 0-2-2H5a2 2 0 0 1-2-2Z"/></symbol>
+<symbol id="i-portfolio" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18M10 12v2h4v-2"/></symbol>
+<symbol id="i-proposal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h6"/></symbol>
+<symbol id="i-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2.5"/><path d="M5 17c.8-2 2.1-3 4-3s3.2 1 4 3M15 9h3M15 13h3M15 17h2"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+</defs></svg>
+
+<div class="wrap">
+  <header class="top">
+    <div class="lockup">
+      <div class="logo-halo"><img src="https://mpsmdem-estrela.github.io/MP_Servicos/logo.png" alt="MP Serviços" onerror="this.style.display='none';this.nextElementSibling.style.display='block';"><span class="logo-fallback" style="display:none">MP</span></div>
+      <div class="brand-text">MP Serviços<small>Síndico Profissional</small></div>
+    </div>
+    <span class="badge">Central digital</span>
+  </header>
+
+  <div class="kicker">MP Serviços · Administração condominial</div>
+  <h1>Gestão com método,<br>rigor financeiro e <span>visão de longo prazo.</span></h1>
+  <p class="sub">Acesse os materiais e serviços de Michell Patrick de Souza Moraes: gestão condominial, assessoria administrativa e financeira, governança e compliance.</p>
+
+  <div class="grid">
+    <a class="card" href="portfolio.html" target="_blank" rel="noopener"><span class="num">01</span><svg class="ico"><use href="#i-portfolio"/></svg><h3>Portfólio profissional</h3><p>Experiência, método de gestão, pilares de atuação e formas de trabalho.</p><span class="go">Ver portfólio <svg><use href="#i-arrow"/></svg></span></a>
+    <a class="card" href="curriculo.html" target="_blank" rel="noopener"><span class="num">02</span><svg class="ico"><use href="#i-cv"/></svg><h3>Currículo</h3><p>Formação, trajetória profissional, competências e qualificações.</p><span class="go">Abrir currículo <svg><use href="#i-arrow"/></svg></span></a>
+<a class="card" href="proposta.html" target="_blank" rel="noopener"><span class="num">03</span><svg class="ico"><use href="#i-proposal"/></svg><h3>Proposta de serviços</h3><p>Preencha os dados para preparar e imprimir uma proposta de serviços.</p><span class="go">Abrir formulário <svg><use href="#i-arrow"/></svg></span></a>
+    <a class="card" href="contrato-form.html" target="_blank" rel="noopener"><span class="num">04</span><svg class="ico"><use href="#i-proposal"/></svg><h3>Modelo de contrato</h3><p>Preencha os dados para preparar e imprimir um modelo de contrato.</p><span class="go">Abrir formulário <svg><use href="#i-arrow"/></svg></span></a>
+<a class="card" href="manual.html" target="_blank" rel="noopener"><span class="num">05</span><svg class="ico"><use href="#i-book"/></svg><h3>Manual da Marca</h3><p>Consulte o manual de identidade visual para Power BI e apresentações executivas.</p><span class="go">Abrir manual <svg><use href="#i-arrow"/></svg></span></a>
+  </div>
+  
+  <div class="foot">
+    <div class="footer-lockup"><div class="logo-halo"><img src="https://mpsmdem-estrela.github.io/MP_Servicos/logo.png" alt="MP Serviços" onerror="this.style.display='none';this.nextElementSibling.style.display='block';"><span class="logo-fallback" style="display:none">MP</span></div><b>MP Serviços</b></div>
+    <span>Gestão condominial · Manaus/AM · (92) 98553-7155</span>
+  </div>
+</div>
+</body>
+</html>
