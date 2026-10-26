@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfólio profissional de Michell Patrick de Souza Moraes — síndico profissional e assessor condominial em Manaus/AM.">
+  <title>Portfólio Profissional | Michell Patrick — MP Serviços</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --azul-institucional: #0F2233;
+      --azul-tecnico: #2E5A88;
+      --azul-medio: #1F3F5B;
+      --azul-claro: #4F7FB3;
+      --cinza-metalico: #9AA3A8;
+      --cinza-claro: #F4F6F8;
+      --branco: #FFFFFF;
+      --borda: rgba(79, 127, 179, .32);
+      --texto-impressao: #263746;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--cinza-claro);
+      background: var(--azul-institucional);
+      font-family: 'Montserrat', Arial, sans-serif;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container { width: min(1120px, calc(100% - 48px)); margin: 0 auto; }
+    .site-header {
+      background: rgba(15, 34, 51, .94);
+      border-bottom: 1px solid var(--borda);
+      padding: 14px 0;
+    }
+    .header-inner, .brand, .header-actions, .contact-row, .footer-inner {
+      display: flex; align-items: center;
+    }
+    .header-inner { justify-content: space-between; gap: 24px; }
+    .brand { gap: 14px; min-width: 0; }
+    .logo-halo {
+      position: relative; width: 56px; height: 56px; flex: 0 0 56px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .logo-halo::before {
+      content: ''; position: absolute; inset: -14px;
+      background: radial-gradient(circle, rgba(79,127,179,.55) 0%, rgba(79,127,179,.18) 45%, transparent 75%);
+      border-radius: 50%; z-index: 0; pointer-events: none;
+    }
+    .logo-halo img {
+      position: relative; z-index: 1; width: 100%; height: 100%; object-fit: contain;
+      filter: drop-shadow(0 0 8px rgba(79,127,179,.6)) brightness(1.1);
+    }
+    .brand-copy { display: flex; flex-direction: column; line-height: 1.2; }
+    .brand-name { color: var(--branco); font-weight: 700; font-size: 16px; }
+    .brand-role { color: var(--azul-claro); font-size: 11px; font-weight: 600; letter-spacing: 1.5px; }
+    .header-actions { gap: 12px; }
+    .print-button {
+      border: 1px solid var(--azul-claro); border-radius: 7px; padding: 10px 16px;
+      background: rgba(46,90,136,.2); color: var(--branco); font: 600 13px 'Montserrat', Arial, sans-serif;
+      cursor: pointer; transition: background .2s, transform .2s;
+    }
+    .print-button:hover { background: var(--azul-tecnico); transform: translateY(-1px); }
+    .hero {
+      position: relative; overflow: hidden; padding: 64px 0 54px;
+      background: linear-gradient(180deg, var(--azul-institucional), var(--azul-medio));
+      border-bottom: 1px solid var(--borda);
+    }
+    .hero::before {
+      content: ''; position: absolute; width: 680px; height: 680px; left: 50%; top: -390px;
+      transform: translateX(-50%); background: radial-gradient(circle, rgba(46,90,136,.3), transparent 68%);
+      pointer-events: none;
+    }
+    .hero .container { position: relative; }
+    .eyebrow, .section-kicker {
+      color: var(--azul-claro); font-size: 11px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .eyebrow { margin: 0 0 12px; }
+    h1, h2, h3 { line-height: 1.2; }
+    h1 { margin: 0; color: var(--branco); font-size: clamp(32px, 5vw, 50px); letter-spacing: -1.3px; }
+    .hero-role { margin: 11px 0 16px; color: var(--azul-claro); font-size: 17px; font-weight: 600; }
+    .hero-intro { max-width: 780px; margin: 0; color: var(--cinza-metalico); font-size: 16px; }
+    .contact-row { flex-wrap: wrap; gap: 8px 20px; margin-top: 24px; color: var(--cinza-claro); font-size: 13px; }
+    .contact-row a, .content a { color: #78A8DA; text-decoration: none; }
+    .contact-row a:hover, .content a:hover { text-decoration: underline; }
+    main { padding: 34px 0 56px; }
+    .content-section { margin: 0 0 28px; }
+    .section-heading { margin: 0 0 16px; }
+    .section-kicker { margin: 0 0 7px; }
+    h2 { margin: 0; color: var(--branco); font-size: 25px; letter-spacing: -.4px; }
+    .section-panel {
+      padding: 24px 26px; border: 1px solid var(--borda); border-radius: 10px;
+      background: rgba(31,63,91,.72);
+    }
+    .section-panel p { margin: 0 0 13px; color: #D6DDE2; font-size: 14px; }
+    .section-panel p:last-child { margin-bottom: 0; }
+    .credentials {
+      margin-top: 18px; padding: 17px 19px; border-left: 3px solid var(--azul-claro);
+      border-radius: 0 7px 7px 0; background: rgba(15,34,51,.52); color: var(--cinza-claro); font-size: 13px;
+    }
+    .credentials strong { color: var(--branco); }
+    .pillar-intro { margin: 0 0 18px; color: #D6DDE2; font-size: 14px; }
+    .pillars { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
+    .pillar {
+      padding: 20px; border: 1px solid var(--borda); border-radius: 9px;
+      background: rgba(31,63,91,.72); break-inside: avoid;
+    }
+    .pillar:last-child { grid-column: 1 / -1; }
+    .pillar-number { color: var(--azul-claro); font-size: 11px; font-weight: 800; letter-spacing: 1.7px; text-transform: uppercase; }
+    .pillar h3 { margin: 7px 0 12px; color: var(--branco); font-size: 16px; }
+    .pillar p { margin: 0 0 10px; color: #D6DDE2; font-size: 13px; }
+    .pillar p:last-child { margin-bottom: 0; }
+    .pillar strong { color: var(--branco); }
+    .tools-list, .services-list { display: grid; gap: 12px; }
+    .info-item {
+      padding: 17px 19px; border: 1px solid var(--borda); border-radius: 8px;
+      background: rgba(31,63,91,.72); break-inside: avoid;
+    }
+    .info-item h3 { margin: 0 0 6px; color: var(--branco); font-size: 15px; }
+    .info-item p { margin: 0; color: #D6DDE2; font-size: 13px; }
+    .service-intro { margin-bottom: 15px !important; }
+    .contact-cta {
+      margin-top: 22px; padding: 22px; text-align: center; border: 1px solid var(--borda);
+      border-radius: 9px; background: rgba(15,34,51,.52);
+    }
+    .contact-cta h3 { margin: 0 0 5px; color: var(--branco); font-size: 19px; }
+    .contact-cta p { margin: 0 0 8px; color: var(--cinza-metalico); font-size: 13px; }
+    .contact-cta .cta-contact { color: var(--branco); font-size: 14px; font-weight: 600; }
+    .site-footer { padding: 24px 0; border-top: 1px solid var(--borda); background: rgba(15,34,51,.72); }
+    .footer-inner { justify-content: space-between; gap: 20px; }
+    .footer-brand { display: flex; align-items: center; gap: 12px; }
+    .footer-brand .logo-halo { width: 44px; height: 44px; flex-basis: 44px; }
+    .footer-copy { color: var(--cinza-metalico); font-size: 11px; }
+    .footer-copy strong { display: block; color: var(--branco); font-size: 12px; }
+    .footer-contact { color: var(--cinza-metalico); font-size: 11px; text-align: right; }
+
+    @page { size: A4; margin: 15mm 16mm 17mm; }
+    @media print {
+      html, body { background: #fff !important; color: var(--texto-impressao) !important; font-size: 10pt; }
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .container { width: 100%; max-width: none; }
+      .site-header { padding: 0 0 8mm; background: #fff !important; border-bottom: 1px solid #CBD4DC; }
+      .logo-halo { width: 42px; height: 42px; flex-basis: 42px; }
+      .logo-halo::before { inset: -9px; }
+      .logo-halo img { filter: drop-shadow(0 0 5px rgba(79,127,179,.5)) brightness(1.04); }
+      .brand-name { color: var(--azul-institucional); }
+      .brand-role { color: var(--azul-tecnico); }
+      .print-button { display: none !important; }
+      .hero { padding: 10mm 0 8mm; background: #fff !important; border-bottom: 2px solid var(--azul-tecnico); }
+      .hero::before { display: none; }
+      .eyebrow, .section-kicker { color: var(--azul-tecnico); }
+      h1, h2, .pillar h3, .info-item h3, .contact-cta h3 { color: var(--azul-institucional) !important; }
+      h1 { font-size: 25pt; }
+      .hero-role { color: var(--azul-tecnico); font-size: 12pt; }
+      .hero-intro, .contact-row, .section-panel p, .pillar-intro, .pillar p, .info-item p, .contact-cta p { color: var(--texto-impressao) !important; }
+      .contact-row { margin-top: 4mm; font-size: 9pt; }
+      .contact-row a, .content a { color: var(--azul-tecnico) !important; }
+      main { padding: 7mm 0 0; }
+      .content-section { margin-bottom: 7mm; }
+      .section-heading { margin-bottom: 3mm; }
+      h2 { font-size: 16pt; }
+      .section-panel, .pillar, .info-item, .contact-cta, .credentials {
+        background: #fff !important; border-color: #CBD4DC !important; box-shadow: none !important;
+      }
+      .section-panel { padding: 5mm; }
+      .section-panel p { font-size: 9.5pt; }
+      .credentials { color: var(--texto-impressao); }
+      .credentials strong, .pillar strong { color: var(--azul-institucional); }
+      .pillars { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 3mm; }
+      .pillar { padding: 4mm; }
+      .pillar:last-child { grid-column: 1 / -1; }
+      .pillar h3 { font-size: 11pt; }
+      .pillar p, .info-item p { font-size: 9pt; }
+      .pillar-number { color: var(--azul-tecnico); }
+      .info-item { padding: 4mm; }
+      .contact-cta { padding: 5mm; }
+      .contact-cta .cta-contact { color: var(--azul-institucional); }
+      .site-footer { margin-top: 4mm; padding: 5mm 0 0; background: #fff !important; border-top: 1px solid #CBD4DC; }
+      .footer-copy, .footer-contact { color: var(--texto-impressao); }
+      .footer-copy strong { color: var(--azul-institucional); }
+      a { text-decoration: none !important; }
+      .section-panel, .pillar, .info-item, .credentials, .contact-cta { break-inside: avoid; }
+    }
+    @media (max-width: 720px) {
+      .container { width: min(100% - 32px, 600px); }
+      .header-inner, .footer-inner { align-items: flex-start; }
+      .header-inner { flex-wrap: wrap; }
+      .header-actions { margin-left: auto; }
+      .hero { padding: 45px 0 38px; }
+      .pillars { grid-template-columns: 1fr; }
+      .pillar:last-child { grid-column: auto; }
+      .section-panel { padding: 19px; }
+      .footer-inner { flex-direction: column; }
+      .footer-contact { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="logo-halo">
+          <img src="https://mpsmdem-estrela.github.io/MP_Servicos/logo.png" alt="MP Serviços — Síndico Profissional">
+        </div>
+        <div class="brand-copy">
+          <span class="brand-name">MP Serviços</span>
+          <span class="brand-role">Síndico Profissional</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="print-button" type="button" onclick="window.print()">Imprimir portfólio</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">Portfólio profissional</p>
+      <h1>Michell Patrick de Souza Moraes</h1>
+      <p class="hero-role">Síndico Profissional &amp; Assessor Condominial</p>
+      <p class="hero-intro">Gestão administrativa e financeira profissional, conservação patrimonial, governança e compliance.</p>
+      <div class="contact-row">
+        <span>Manaus/AM</span>
+        <span>(92) 98553-7155</span>
+        <a href="mailto:mpsmdem@gmail.com">mpsmdem@gmail.com</a>
+        <a href="https://linkedin.com/in/michellpatrick" target="_blank" rel="noopener">LinkedIn</a>
+        <span>CNPJ: 41.799.944/0001-58</span>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+    <section class="content-section" aria-labelledby="sobre-titulo">
+      <div class="section-heading">
+        <p class="section-kicker">Quem sou</p>
+        <h2 id="sobre-titulo">Gestão com método, rigor financeiro e visão de longo prazo</h2>
+      </div>
+      <div class="section-panel">
+        <p>Administrador com mais de 20 anos de experiência em gestão financeira, controladoria e auditoria, com trajetória sólida na indústria (Moto Honda, Hitachi Astemo) e no terceiro setor (COIAB). Minha transição para a gestão condominial não foi um acidente, mas uma aplicação estratégica do que há de mais moderno em governança corporativa para o dia a dia do condomínio.</p>
+        <p>Formei-me Síndico Profissional e em Administração de Condomínios, antes de assumir a gestão do Condomínio Residencial Jardim Paradiso Antúrio, onde atuei por 4 anos e também como conselheiro fiscal. Conheço o condomínio dos dois lados: o controle e a gestão.</p>
+        <p>O diferencial não é apenas “administrar”. É aplicar controles internos, análise de custos e transparência para garantir que o dinheiro do condômino seja tratado com o mesmo rigor de uma grande empresa, porque é. Não trabalho com “achismos” — cada decisão tem método, lastro técnico e respaldo documental.</p>
+        <p>Acredito em gestão participativa: as decisões são tomadas com o conselho e com os moradores. Os resultados são de todos — não do síndico.</p>
+        <div class="credentials"><strong>Credenciais:</strong> MBA em Finanças, Controladoria e Auditoria · MBA em Gestão de Projetos e Processos (artigo nota 9,9 sobre governança em OSCs) · MBA em Gestão da Qualidade · MBA em Gestão de Pessoas · Formação em Síndico Profissional (72h) · Graduação em Administração.</div>
+      </div>
+    </section>
+
+    <section class="content-section" aria-labelledby="pilares-titulo">
+      <div class="section-heading">
+        <p class="section-kicker">Método de gestão</p>
+        <h2 id="pilares-titulo">Os 5 pilares de atuação</h2>
+      </div>
+      <p class="pillar-intro">Minha gestão é baseada em cinco pilares técnicos que garantem a saúde financeira, a segurança jurídica e a valorização do seu patrimônio, sempre com respeito à autonomia institucional do condomínio.</p>
+      <div class="pillars">
+        <article class="pillar">
+          <span class="pillar-number">Pilar 01</span>
+          <h3>Gestão Financeira e Orçamentária <span>(O Controle do Dinheiro)</span></h3>
+          <p><strong>Ação:</strong> Desenvolvimento de um planejamento orçamentário realista e transparente.</p>
+          <p><strong>Como faço (Técnica):</strong> Aplico controles rígidos sobre a arrecadação e a despesa. Faço a gestão segregada de verbas com destinação específica (como taxas extras e fundos de reserva), garantindo o cumprimento estrito do Código Civil e evitando o desvio de finalidade. A prestação de contas é feita com relatórios visuais (dashboards), para que o morador entenda exatamente para onde vai cada centavo.</p>
+          <p><strong>Gestão em Crise:</strong> Durante a pandemia, mantive o condomínio financeiramente saudável, com manutenções em dia e caixa preservado — e ainda ampliei prazos e suspendi juros para dar fôlego aos moradores.</p>
+        </article>
+        <article class="pillar">
+          <span class="pillar-number">Pilar 02</span>
+          <h3>Gestão Patrimonial e de Infraestrutura <span>(A Conservação do Investimento)</span></h3>
+          <p><strong>Ação:</strong> Planejamento de manutenção preventiva focado na valorização do imóvel.</p>
+          <p><strong>Como faço (Técnica):</strong> Implemento cronogramas de manutenção predial para evitar que pequenos problemas (infiltrações, falhas elétricas) se tornem obras emergenciais de alto custo. Realizo revisão periódica de contratos de terceiros e cotações rigorosas, buscando economia sem perda de qualidade.</p>
+        </article>
+        <article class="pillar">
+          <span class="pillar-number">Pilar 03</span>
+          <h3>Gestão Operacional e de Pessoas <span>(A Eficiência do Dia a Dia)</span></h3>
+          <p><strong>Ação:</strong> Organização de rotinas, fluxos de atendimento e gestão de equipes e fornecedores.</p>
+          <p><strong>Como faço (Técnica):</strong> Estruturo os fluxos de portaria, recebimento de encomendas e atendimento a moradores. Utilizo ferramentas digitais para criar checklists de rotina e rastrear a execução de serviços contratados, garantindo que o que foi pago seja efetivamente entregue.</p>
+        </article>
+        <article class="pillar">
+          <span class="pillar-number">Pilar 04</span>
+          <h3>Segurança e Convivência <span>(A Tranquilidade do Lar)</span></h3>
+          <p><strong>Ação:</strong> Auditoria de sistemas de segurança e conservação de áreas comuns.</p>
+          <p><strong>Como faço (Técnica):</strong> Avalio constantemente a eficácia de CFTV, cercas e controle de acesso. Garanto a manutenção e a funcionalidade das áreas de lazer (quadras, piscinas, playgrounds), promovendo espaços seguros que incentivam a integração da comunidade.</p>
+        </article>
+        <article class="pillar">
+          <span class="pillar-number">Pilar 05</span>
+          <h3>Governança, Compliance e Transparência <span>(A Segurança Jurídica)</span></h3>
+          <p><strong>Ação:</strong> Alinhamento das práticas administrativas à convenção, ao regimento e à legislação.</p>
+          <p><strong>Como faço (Técnica):</strong> Faço a gestão cruzada dos documentos do condomínio (atas, convenção, regimento) para garantir que todas as decisões da gestão tenham respaldo legal. Utilizo tecnologia para criar processos rastreáveis e auditáveis, garantindo que a administração seja imune a questionamentos infundados e que a transparência seja a regra.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="content-section" aria-labelledby="ferramentas-titulo">
+      <div class="section-heading">
+        <p class="section-kicker">Tecnologia e transparência</p>
+        <h2 id="ferramentas-titulo">Ferramentas e governança</h2>
+      </div>
+      <div class="section-panel">
+        <p>Não gerencio com base em “achismos”. Utilizo ferramentas de mercado para dar visibilidade aos números e processos:</p>
+        <div class="tools-list">
+          <article class="info-item">
+            <h3>Dashboards de Gestão (Looker Studio / Excel Avançado)</h3>
+            <p>Relatórios visuais e de fácil leitura para que o conselho e os moradores saibam exatamente para onde vai cada centavo.</p>
+          </article>
+          <article class="info-item">
+            <h3>Gestão de Processos (Apps Script + HTML, AppSheet, Google Workspace)</h3>
+            <p>Desenvolvimento de aplicações web e automações próprias para que o processo administrativo flua de forma ágil, segura e rastreável. Criação de apresentações profissionais e métodos eficientes de controle administrativo-financeiro.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" aria-labelledby="servicos-titulo">
+      <div class="section-heading">
+        <p class="section-kicker">Atuação</p>
+        <h2 id="servicos-titulo">Serviços e contato</h2>
+      </div>
+      <div class="section-panel">
+        <p class="service-intro"><strong>Como posso atuar no seu condomínio?</strong><br>Sempre com respeito à autonomia institucional e às necessidades específicas do seu condomínio. Condomínio é empresa, tem CNPJ, tem autonomia. As propostas são personalizadas, não disruptivas por natureza — disruptivas só se o condomínio quiser.</p>
+        <div class="services-list">
+          <article class="info-item">
+            <h3>Síndico Profissional</h3>
+            <p>Assunção completa da gestão administrativa, financeira e operacional, com representação legal, método, controles e transparência.</p>
+          </article>
+          <article class="info-item">
+            <h3>Assessoria Condominial</h3>
+            <p>Apoio técnico e financeiro para síndicos moradores que precisam de ajuda na organização, no controle e na implantação de processos. O condomínio decide; a assessoria executa com método.</p>
+          </article>
+          <article class="info-item">
+            <h3>Diagnóstico e Plano de Ação</h3>
+            <p>Avaliação da situação atual do condomínio (auditoria de contratos, finanças e infraestrutura) e apresentação de um plano de melhorias estruturado.</p>
+          </article>
+        </div>
+        <div class="contact-cta">
+          <h3>Vamos conversar?</h3>
+          <p>Agende uma reunião para apresentarmos um diagnóstico inicial do seu condomínio.</p>
+          <p class="cta-contact">Michell Patrick | (92) 98553-7155 | <a href="mailto:mpsmdem@gmail.com">mpsmdem@gmail.com</a></p>
+          <p><a href="https://www.mpsmdem-estrela.github.io/MP_Servicos/" target="_blank" rel="noopener">www.mpsmdem-estrela.github.io/MP_Servicos/</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div class="logo-halo"><img src="https://mpsmdem-estrela.github.io/MP_Servicos/logo.png" alt="MP Serviços — Síndico Profissional"></div>
+        <div class="footer-copy"><strong>MP Serviços</strong>Gestão com método e rigor</div>
+      </div>
+      <div class="footer-contact">Manaus/AM · (92) 98553-7155<br>mpsmdem@gmail.com · CNPJ 41.799.944/0001-58</div>
+    </div>
+  </footer>
+</body>
+</html>

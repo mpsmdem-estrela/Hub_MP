@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preencher contrato | MP Serviços</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--navy:#0F2233;--blue:#2E5A88;--blue-light:#4F7FB3;--gray:#5F6B73;--mid:#9AA3A8;--line:#C7CED4;--mist:#F4F6F8;--white:#fff;--ink:#28343C}
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;font-family:Montserrat,"Segoe UI",Arial,sans-serif;color:var(--navy);-webkit-font-smoothing:antialiased}
+    body{background:#e9edf0}
+    .form-screen{min-height:100vh;background:radial-gradient(circle at 50% 0,rgba(46,90,136,.24),transparent 42%),var(--navy);color:#f4f6f8}
+    .form-header,.form-footer{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px max(24px,calc((100vw - 960px)/2));border-bottom:1px solid #4f7fb355}
+    .form-footer{border-top:1px solid #4f7fb355;border-bottom:0;color:#9aa3a8;font-size:12px}
+    .form-brand{display:flex;align-items:center;gap:13px}.form-brand .logo-halo{width:54px;height:54px}
+    .form-brand strong,.form-brand span{display:block}.form-brand strong{font-size:15px;color:#fff}.form-brand span{font-size:10px;color:#4f7fb3;letter-spacing:1px;font-weight:700}
+    .form-tag{border:1px solid #4f7fb355;border-radius:99px;padding:8px 14px;color:#9fb9d9;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+    .logo-halo{position:relative;width:16mm;height:16mm;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+    .logo-halo::before{content:"";position:absolute;inset:-4mm;background:radial-gradient(circle,rgba(79,127,179,.5) 0%,rgba(79,127,179,.18) 45%,transparent 75%);border-radius:50%;z-index:0;pointer-events:none}
+    .logo-halo img{position:relative;z-index:1;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 0 2mm rgba(79,127,179,.58)) brightness(1.08)}
+    .form-shell{width:min(920px,calc(100% - 32px));margin:0 auto;padding:42px 0 52px}
+    .form-eyebrow{margin:0 0 8px;color:#4f7fb3;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase}
+    .form-shell>h1{margin:0;color:#fff;font-size:clamp(28px,4vw,40px);line-height:1.15;letter-spacing:-.8px}
+    .form-intro{max-width:740px;margin:12px 0 28px;color:#b7c1c8;font-size:14px;line-height:1.6}
+    .form-card{margin:0 0 16px;padding:22px 24px;border:1px solid #4f7fb355;border-radius:10px;background:rgba(31,63,91,.72)}
+    .form-card h2{margin:0 0 16px;color:#fff;font-size:17px;letter-spacing:0}
+    .form-help{margin:-5px 0 15px;color:#bac4cb;font-size:12px;line-height:1.5}
+    .form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px 16px}
+    .form-field{display:block;min-width:0}.form-field>span{display:block;margin:0 0 6px;color:#dce4e9;font-size:11px;font-weight:700}.form-field b{color:#9fb9d9}
+    .form-field input,.form-field textarea,.form-field select{width:100%;border:1px solid #71889a;border-radius:6px;padding:10px 11px;background:#f8fafb;color:#102b40;font:13px Montserrat,Arial,sans-serif;line-height:1.45}
+    .form-field textarea{resize:vertical}.form-field input:focus,.form-field textarea:focus,.form-field select:focus{outline:2px solid #4f7fb3;outline-offset:1px}
+    .form-hint{display:block;margin-top:5px;color:#9aa3a8;font-size:10px;line-height:1.4}
+    .calculated{margin:14px 0 0;padding:12px 14px;border-left:3px solid #4f7fb3;background:rgba(15,34,51,.45);color:#e1e8ed;font-size:13px}
+    .form-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}.form-actions button,.toolbar button{border:0;border-radius:7px;padding:13px 18px;font:700 13px Montserrat,Arial,sans-serif;cursor:pointer}
+    .primary-action{background:#2e5a88;color:#fff}.primary-action:hover{background:#4f7fb3}.reset-action{border:1px solid #71889a!important;background:transparent;color:#dce4e9}
+    .form-note{margin:12px 0 0;color:#9aa3a8;font-size:11px;line-height:1.5}
+    .form-error{display:none;margin:0 0 16px;padding:12px 14px;border-left:3px solid #e57373;background:rgba(183,54,54,.15);color:#ffe2e2;font-size:13px}
+    .toolbar{display:none;position:fixed;z-index:99;right:18px;bottom:18px;gap:8px}
+    .generated .toolbar{display:flex}.toolbar button{background:var(--navy);color:#fff;box-shadow:0 4px 16px #0f223344}.toolbar button.secondary{background:var(--blue)}
+
+    /* Minuta para leitura contínua e paginação natural. A4 sem altura fixa nem overflow oculto. */
+    @page{size:A4 portrait;margin:0}
+    .sheet{display:none;width:210mm;min-height:297mm;margin:8mm auto;padding:17mm 21mm 14mm;background:#fff;box-shadow:0 5px 22px rgba(15,34,51,.16);break-after:page;page-break-after:always;flex-direction:column}
+    .generated .sheet{display:flex}.generated .form-screen{display:none}
+    .sheet:last-of-type{break-after:auto;page-break-after:auto}
+    .document-head{display:flex;align-items:center;justify-content:space-between;gap:12mm;padding-bottom:4mm;border-bottom:.3mm solid var(--line);margin-bottom:7mm}
+    .document-brand{font-size:9pt;font-weight:800;letter-spacing:.04em;color:var(--navy)}
+    .document-brand small{display:block;margin-top:1mm;font-size:7.5pt;font-weight:500;color:var(--gray);letter-spacing:.02em}
+    .document-head .logo-halo{width:13mm;height:13mm}
+    .document-title{text-align:center;margin:2mm 0 7mm}
+    .document-title h1{font-size:17pt;line-height:1.23;margin:0;color:var(--navy);font-weight:800;text-transform:uppercase;letter-spacing:.02em}
+    .document-title h2{font-size:12pt;line-height:1.23;margin:1mm 0 1.5mm;color:var(--blue);font-weight:800;text-transform:uppercase}
+    .document-title p{font-size:9pt;font-style:italic;color:var(--gray);margin:0}
+    .parties{background:var(--mist);border-left:1.2mm solid var(--blue);padding:4mm 5mm;margin-bottom:5mm}
+    .parties p{font-size:10pt;line-height:1.48;margin:0 0 2mm;color:var(--ink);text-align:justify;overflow-wrap:anywhere}
+    .parties p:last-child{margin-bottom:0}.parties strong{color:var(--navy)}
+    .intro{font-size:10pt;line-height:1.48;text-align:justify;color:var(--ink);margin:0 0 4mm}
+    .clause{margin:0 0 3.2mm;break-inside:avoid;page-break-inside:avoid}
+    .clause h3{font-size:10.2pt;line-height:1.28;color:var(--navy);margin:0 0 1.2mm;padding-bottom:.8mm;border-bottom:.25mm solid var(--line);font-weight:800}
+    .clause p{font-size:10pt;line-height:1.48;color:var(--ink);margin:0;text-align:justify}
+    .clause ul{list-style:none;padding:0;margin:0}
+    .clause li{font-size:9.8pt;line-height:1.45;color:var(--ink);margin:0 0 1.2mm;padding-left:7mm;position:relative;text-align:justify}
+    .clause li:last-child{margin-bottom:0}.clause li span{position:absolute;left:0;color:var(--blue);font-weight:700}
+    .document-footer{display:flex;justify-content:space-between;align-items:center;gap:5mm;margin-top:auto;padding-top:2mm;border-top:.25mm solid var(--line);color:var(--gray);font-size:7pt}.document-footer span{flex:1}.document-footer span:last-child{text-align:right}.document-footer .footer-mark{width:9mm;height:9mm}
+    .date{text-align:center;font-size:10pt;color:var(--ink);margin:8mm 0 8mm}
+    .signatures{display:grid;grid-template-columns:1fr 1fr;gap:10mm;margin:0 2mm 7mm;break-inside:avoid}
+    .signature{text-align:center;min-height:25mm}.signature .line{border-top:.35mm solid var(--navy);height:2mm;margin-top:10mm}
+    .signature strong{display:block;font-size:8.8pt;color:var(--navy);margin-bottom:1mm}.signature span{display:block;font-size:7.8pt;color:var(--gray)}
+    .witness-title{font-size:9.3pt;font-weight:800;color:var(--navy);margin:0 0 3mm}
+    .witness{display:grid;grid-template-columns:8mm 1fr 12mm 40mm;gap:2mm;align-items:end;font-size:8.3pt;color:var(--ink);margin:0 0 3mm;break-inside:avoid}
+    .witness .blank{border-bottom:.25mm solid var(--mid);height:5mm}
+    .generated .sheet{color:var(--navy)}
+    @media print{
+      html,body{margin:0!important;padding:0!important;background:#fff!important}
+      .form-screen,.toolbar{display:none!important}
+      .sheet{display:flex!important;width:210mm;margin:0;padding:16mm 20mm 13mm;min-height:297mm;box-shadow:none;}
+      .sheet:last-of-type{break-after:auto;page-break-after:auto}
+    }
+    @media screen and (max-width:760px){
+      .form-header,.form-footer{padding:12px 16px}.form-tag{font-size:9px}.form-shell{padding:30px 0 38px}.form-card{padding:18px 16px}.form-grid{grid-template-columns:1fr}.form-footer{align-items:flex-start;flex-direction:column}
+      .sheet{width:100%;min-height:100vh;margin:0 0 8mm;padding:12mm 8mm 18mm}.document-head .logo-halo{width:14mm;height:14mm}.document-title h1{font-size:13pt}
+    }
+  </style>
+</head>
+<body>
+  <div class="form-screen" id="form-screen">
+    <header class="form-header">
+      <div class="form-brand"><div class="logo-halo"><img src="https://mpsmdem-estrela.github.io/MP_Servicos/logo.png" alt="MP Serviços"></div><div><strong>MP Serviços</strong><span>Síndico Profissional</span></div></div>
+      <span class="form-tag">Gerador de contrato</span>
+    </header>
+    <main class="form-shell">
+      <p class="form-eyebrow">Minuta de referência</p>
+      <h1>Preencha os dados do contrato</h1>
+      <p class="form-intro">Informe os dados das partes, condições comerciais e rotina de trabalho. Ao gerar, revise o documento antes de imprimir. A redação-base das cláusulas é mantida.</p>
+      <div class="form-error" id="form-error" role="alert"></div>
+      <form id="contract-form">
+        <section class="form-card">
+          <h2>1. Identificação das partes</h2>
+          <div class="form-grid">
+            <label class="form-field"><span>Nome do condomínio contratante <b>*</b></span><input id="client-name" required maxlength="100" placeholder="Razão social / nome do condomínio"></label>
+            <label class="form-field"><span>CNPJ do condomínio <b>*</b></span><input id="client-cnpj" required maxlength="24" placeholder="00.000.000/0000-00"></label>
+            <label class="form-field"><span>Endereço do condomínio <b>*</b></span><input id="client-address" required maxlength="150" placeholder="Rua, número, bairro, cidade/UF"></label>
+            <label class="form-field"><span>Nome do contratado <b>*</b></span><input id="provider-name" required maxlength="100" value="Michell Patrick de Souza Moraes"></label>
+            <label class="form-field"><span>CNPJ do contratado <b>*</b></span><input id="provider-cnpj" required maxlength="24" value="41.799.944/0001-58"></label>
+            <label class="form-field"><span>Endereço do contratado <b>*</b></span><input id="provider-address" required maxlength="150" placeholder="Endereço profissional que constará no contrato"></label>
+            <label class="form-field"><span>Representante do condomínio para assinatura <b>*</b></span><input id="client-representative" required maxlength="100" placeholder="Nome completo"></label>
+            <label class="form-field"><span>Função do representante</span><input id="client-role" maxlength="80" placeholder="Ex.: Síndico(a), procurador(a)"></label>
+          </div>
+        </section>
+
+        <section class="form-card">
+          <h2>2. Prazo e remuneração</h2>
+          <div class="form-grid">
+            <label class="form-field"><span>Vigência em meses <b>*</b></span><input id="term-months" type="number" min="1" max="24" step="1" required placeholder="Ex.: 12"><small class="form-hint">O texto-base prevê limite inicial de até dois anos para o mandato. Confirme o prazo aplicável.</small></label>
+            <label class="form-field"><span>Unidades consideradas no cálculo <b>*</b></span><input id="units" type="number" min="1" step="1" required placeholder="Ex.: 120"></label>
+            <label class="form-field"><span>Valor mensal por unidade (R$) <b>*</b></span><input id="unit-fee" type="number" min="0" step="0.01" inputmode="decimal" required placeholder="0,00"></label>
+            <label class="form-field"><span>Valor total mensal por extenso <b>*</b></span><input id="total-words" required maxlength="180" placeholder="Ex.: cinco mil, quinhentos e vinte reais"><small class="form-hint">Confira se corresponde ao total mensal calculado.</small></label>
+            <label class="form-field"><span>Dia de pagamento <b>*</b></span><input id="payment-day" type="number" min="1" max="31" step="1" required placeholder="1 a 31"></label>
+          </div>
+          <div class="calculated">Total mensal calculado: <strong id="calculated-total">Informe unidades e valor por unidade.</strong> O valor numérico será calculado para evitar divergência entre total e preço unitário.</div>
+        </section>
+
+        <section class="form-card">
+          <h2>3. Forma de trabalho</h2>
+          <div class="form-grid">
+            <label class="form-field"><span>Presenças mínimas por semana <b>*</b></span><input id="visits-per-week" type="number" min="1" max="7" step="1" required placeholder="Ex.: 3"></label>
+            <label class="form-field"><span>Dias / padrão de comparecimento <b>*</b></span><input id="work-days" required maxlength="100" placeholder="Ex.: em dias alternados"></label>
+            <label class="form-field"><span>Horário de atendimento presencial <b>*</b></span><input id="work-hours" required maxlength="60" placeholder="Ex.: das 08h às 17h"></label>
+            <label class="form-field"><span>Canal de plantão para emergências <b>*</b></span><input id="emergency-channel" required maxlength="100" placeholder="Ex.: via portaria"></label>
+          </div>
+        </section>
+
+        <section class="form-card">
+          <h2>4. Rescisão e foro</h2>
+          <div class="form-grid">
+            <label class="form-field"><span>Aviso prévio para rescisão (dias) <b>*</b></span><input id="notice-days" type="number" min="1" max="365" step="1" required placeholder="Ex.: 30"></label>
+            <label class="form-field"><span>Comarca / foro <b>*</b></span><input id="forum" required maxlength="80" value="Manaus/AM"></label>
+          </div>
+          <p class="form-help">As demais cláusulas da minuta são mantidas como no documento original. Esta etapa organiza os dados e a diagramação; não é uma revisão jurídica.</p>
+        </section>
+
+        <section class="form-card">
+          <h2>5. Data e assinaturas</h2>
+          <div class="form-grid">
+            <label class="form-field"><span>Cidade da assinatura <b>*</b></span><input id="sign-city" required maxlength="80" value="Manaus/AM"></label>
+            <label class="form-field"><span>Data da assinatura <b>*</b></span><input id="sign-date" type="date" required></label>
+            <label class="form-field"><span>Testemunha 1 — nome (opcional)</span><input id="witness1-name" maxlength="100" placeholder="Pode ser preenchido à mão"></label>
+            <label class="form-field"><span>Testemunha 1 — CPF (opcional)</span><input id="witness1-cpf" maxlength="24" placeholder="Pode ser preenchido à mão"></label>
+            <label class="form-field"><span>Testemunha 2 — nome (opcional)</span><input id="witness2-name" maxlength="100" placeholder="Pode ser preenchido à mão"></label>
+            <label class="form-field"><span>Testemunha 2 — CPF (opcional)</span><input id="witness2-cpf" maxlength="24" placeholder="Pode ser preenchido à mão"></label>
+          </div>
+        </section>
+        <div class="form-actions"><button class="primary-action" type="submit">Gerar contrato para revisão</button><button class="reset-action" type="reset">Limpar preenchimento</button></div>
+        <p class="form-note">Os dados específicos do condomínio e o endereço do contratado começam em branco para evitar que informações de outro contrato sejam reutilizadas por engano.</p>
+      </form>
+    </main>
+    <footer class="form-footer"><div class="form-brand"><div class="logo-halo"><img src="https://mpsmdem-estrela.github.io/MP_Servicos/logo.png" alt="MP Serviços"></div><div><strong>MP Serviços</strong><span>Gestão com método e rigor</span></div></div><span>Manaus/AM · (92) 98553-7155</span></footer>
+  </div>
+
+  <div class="toolbar" aria-label="Ações do contrato"><button class="secondary" id="edit-contract" type="button">Voltar para edição</button><button id="print-contract" type="button">Imprimir / PDF</button></div>
+
+  <main class="document" id="contract-document">
+    <section class="sheet">
+      <header class="document-head"><div class="document-brand">MP SERVIÇOS<small>Administração condominial</small></div><div class="logo-halo"><img src="https://mpsmdem-estrela.github.io/MP_Servicos/logo.png" alt="MP Serviços"></div></header>
+      <div class="document-title"><h1>Contrato de Prestação de Serviços</h1><h2>de Síndico Profissional</h2><p>Minuta de Referência</p></div>
+      <div class="parties">
+        <p><strong>CONTRATANTE:</strong> <span id="out-client-name">[Nome do condomínio]</span>, CNPJ <span id="out-client-cnpj">[CNPJ]</span>, endereço <span id="out-client-address">[Endereço]</span>.</p>
+        <p><strong>CONTRATADO:</strong> <span id="out-provider-name">Michell Patrick de Souza Moraes</span>, CNPJ <span id="out-provider-cnpj">41.799.944/0001-58</span>, endereço <span id="out-provider-address">[Endereço do contratado]</span>.</p>
+      </div>
+      <p class="intro">As partes, com base no Código Civil (Lei 10.406/2002, arts. 1.347-1.350) e na Lei 4.591/1964, celebram o presente contrato mediante as seguintes cláusulas:</p>
+
+      <article class="clause"><h3>Cláusula 1ª – Objeto</h3><p>O CONTRATADO prestará serviços de síndico profissional ao CONTRATANTE, exercendo as atribuições previstas na convenção, no regimento interno e na legislação vigente, incluindo gestão administrativa, financeira, operacional e de conservação patrimonial.</p></article>
+      <article class="clause"><h3>Cláusula 2ª – Prazo</h3><p>O presente contrato terá vigência de <span id="out-term">[prazo]</span>, contados da data de assinatura, podendo ser renovado mediante acordo entre as partes. O prazo está alinhado ao mandato de síndico profissional em caráter inicial, não excedendo 2 (dois) anos.</p></article>
+      <article class="clause"><h3>Cláusula 3ª – Remuneração</h3><p>O CONTRATANTE pagará ao CONTRATADO o valor mensal total de <span id="out-total">[valor total]</span> (<span id="out-total-words">[valor por extenso]</span>), correspondente a <span id="out-unit-fee">[valor por unidade]</span> por unidade (<span id="out-units">[quantidade]</span> <span id="out-units-label">unidades</span>). O pagamento será realizado no dia <span id="out-payment-day">[dia]</span> de cada mês, mediante apresentação de Nota Fiscal de Serviços (NFS-e).</p></article>
+      <article class="clause"><h3>Cláusula 4ª – Forma de Trabalho</h3><p>O CONTRATADO comparecerá presencialmente ao condomínio no mínimo <span id="out-visits">[frequência]</span> <span id="out-visits-unit">vezes</span> por semana, <span id="out-work-days">[dias]</span>, para realização de vistorias, atendimento e fiscalização. O atendimento aos condôminos será realizado nos dias de presença, <span id="out-work-hours">[horário]</span>, com plantão para emergências <span id="out-emergency">[canal]</span>.</p></article>
+      <footer class="document-footer"><span>Minuta de contrato · MP Serviços</span><div class="footer-mark logo-halo"><img src="https://mpsmdem-estrela.github.io/MP_Servicos/logo.png" alt="MP Serviços"></div><span>Página 1 de 2</span></footer>
+    </section>
+
+    <section class="sheet">
+      <header class="document-head"><div class="document-brand">MP SERVIÇOS<small>Administração condominial</small></div><div class="logo-halo"><img src="https://mpsmdem-estrela.github.io/MP_Servicos/logo.png" alt="MP Serviços"></div></header>
+      <article class="clause">
+        <h3>Cláusula 5ª – Obrigações do CONTRATADO</h3>
+        <ul><li><span>a)</span>Prestar contas mensalmente ao CONTRATANTE, com relatório financeiro e de gestão;</li><li><span>b)</span>Fiscalizar contratos e serviços terceirizados;</li><li><span>c)</span>Zelar pela conservação do patrimônio e pelo cumprimento da convenção;</li><li><span>d)</span>Convocar e conduzir assembleias, conforme deliberação do conselho;</li><li><span>e)</span>Manter sigilo sobre dados do condomínio.</li></ul>
+      </article>
+      <article class="clause">
+        <h3>Cláusula 6ª – Obrigações do CONTRATANTE</h3>
+        <ul><li><span>a)</span>Disponibilizar documentos, contratos e informações necessárias à gestão;</li><li><span>b)</span>Aprovar orçamento e despesas extraordinárias em assembleia ou junto ao conselho, conforme aplicável;</li><li><span>c)</span>Efetuar o pagamento da remuneração na forma da Cláusula 3ª.</li></ul>
+      </article>
+      <article class="clause"><h3>Cláusula 7ª – Rescisão</h3><p>O presente contrato poderá ser rescindido por qualquer das partes mediante aviso prévio de <span id="out-notice">[dias]</span>. Em caso de destituição do CONTRATADO por deliberação assemblear, o contrato será rescindido automaticamente, sem multa, respeitado o aviso prévio.</p></article>
+      <article class="clause"><h3>Cláusula 8ª – Limitações</h3><p>A atuação do CONTRATADO não abrange serviços jurídicos, contábeis, de engenharia ou execução de obras, que deverão ser contratados diretamente pelo CONTRATANTE com profissionais habilitados.</p></article>
+      <article class="clause"><h3>Cláusula 9ª – Foro</h3><p>Fica eleito o foro da Comarca de <span id="out-forum">[Comarca/UF]</span> para dirimir eventuais controvérsias.</p></article>
+      <p class="date"><span id="out-sign-city">Manaus/AM</span>, <span id="out-sign-date">[data]</span>.</p>
+      <div class="signatures">
+        <div class="signature"><div class="line"></div><strong>CONTRATANTE</strong><span id="out-sign-client">[Representante do condomínio]</span></div>
+        <div class="signature"><div class="line"></div><strong>CONTRATADO</strong><span id="out-sign-provider">Michell Patrick de Souza Moraes</span></div>
+      </div>
+      <p class="witness-title">Testemunhas:</p>
+      <div class="witness"><span>1.</span><span class="blank" id="out-witness1-name"></span><span class="cpf">CPF:</span><span class="blank" id="out-witness1-cpf"></span></div>
+      <div class="witness"><span>2.</span><span class="blank" id="out-witness2-name"></span><span class="cpf">CPF:</span><span class="blank" id="out-witness2-cpf"></span></div>
+      <footer class="document-footer"><span>Minuta de contrato · MP Serviços</span><div class="footer-mark logo-halo"><img src="https://mpsmdem-estrela.github.io/MP_Servicos/logo.png" alt="MP Serviços"></div><span>Página 2 de 2</span></footer>
+    </section>
+  </main>
+
+  <script>
+    (()=>{
+      const form=document.getElementById('contract-form');
+      const errorBox=document.getElementById('form-error');
+      const $=id=>document.getElementById(id);
+      const out=(id,value)=>{const el=$(id);if(el)el.textContent=value;};
+      const words={1:'um',2:'dois',3:'três',4:'quatro',5:'cinco',6:'seis',7:'sete',8:'oito',9:'nove',10:'dez',11:'onze',12:'doze',13:'treze',14:'quatorze',15:'quinze',16:'dezesseis',17:'dezessete',18:'dezoito',19:'dezenove',20:'vinte',21:'vinte e um',22:'vinte e dois',23:'vinte e três',24:'vinte e quatro',25:'vinte e cinco',26:'vinte e seis',27:'vinte e sete',28:'vinte e oito',29:'vinte e nove',30:'trinta',31:'trinta e um'};
+      const numWords=n=>{
+        const value=Number(n);
+        if(words[value])return words[value];
+        if(value===100)return 'cem';
+        if(value>100&&value<1000){
+          const hundreds=['','cento','duzentos','trezentos','quatrocentos','quinhentos','seiscentos','setecentos','oitocentos','novecentos'];
+          const h=Math.floor(value/100),r=value%100;
+          if(!r)return hundreds[h];
+          return hundreds[h]+' e '+numWords(r);
+        }
+        if(value>31&&value<100){
+          const tens=['','','vinte','trinta','quarenta','cinquenta','sessenta','setenta','oitenta','noventa'];
+          const t=Math.floor(value/10),r=value%10;
+          return tens[t]+(r?' e '+numWords(r):'');
+        }
+        return String(value);
+      };
+      const currency=n=>Number(n).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+      const formatDate=raw=>{const [y,m,d]=raw.split('-').map(Number);const date=new Date(y,m-1,d,12);return date.toLocaleDateString('pt-BR',{day:'numeric',month:'long',year:'numeric'});};
+      const val=id=>$(id).value.trim();
+      const showError=message=>{errorBox.textContent=message;errorBox.style.display='block';errorBox.scrollIntoView({behavior:'smooth',block:'center'});};
+      const hideError=()=>{errorBox.textContent='';errorBox.style.display='none';};
+      function updateTotal(){
+        const units=Number($('units').value||0),unitFee=Number($('unit-fee').value||0);
+        $('calculated-total').textContent=units>0&&unitFee>=0&&$('unit-fee').value!==''?`${currency(units*unitFee)} por mês (${units} unidades × ${currency(unitFee)} por unidade).`:'Informe unidades e valor por unidade.';
+      }
+      ['units','unit-fee'].forEach(id=>$(id).addEventListener('input',updateTotal));
+      form.addEventListener('submit',event=>{
+        event.preventDefault();hideError();
+        if(!form.reportValidity())return;
+        const months=Number(val('term-months')),units=Number(val('units')),rate=Number(val('unit-fee')),day=Number(val('payment-day')),visits=Number(val('visits-per-week')),notice=Number(val('notice-days'));
+        if(months<1||months>24){showError('A vigência deve ficar entre 1 e 24 meses.');return;}
+        if(units<1||!Number.isInteger(units)){showError('Informe um número inteiro de unidades maior que zero.');return;}
+        if(!Number.isFinite(units*rate)){showError('Confira a quantidade de unidades e o valor por unidade.');return;}
+        if(day<1||day>31||!Number.isInteger(day)){showError('O dia de pagamento deve ser um número inteiro entre 1 e 31.');return;}
+        if(visits<1||visits>7||!Number.isInteger(visits)){showError('As presenças semanais devem ficar entre 1 e 7.');return;}
+        updateTotal();
+        const total=units*rate;
+        out('out-client-name',val('client-name'));out('out-client-cnpj',val('client-cnpj'));out('out-client-address',val('client-address'));
+        out('out-provider-name',val('provider-name'));out('out-provider-cnpj',val('provider-cnpj'));out('out-provider-address',val('provider-address'));
+        out('out-term',`${months} (${numWords(months)}) ${months===1?'mês':'meses'}`);
+        out('out-total',currency(total));out('out-total-words',val('total-words'));out('out-unit-fee',currency(rate));out('out-units',String(units));out('out-units-label',units===1?'unidade':'unidades');
+        out('out-payment-day',`${String(day).padStart(2,'0')} (${numWords(day)})`);
+        out('out-visits',`${visits} (${visits===1?'uma':numWords(visits)})`);out('out-visits-unit',visits===1?'vez':'vezes');out('out-work-days',val('work-days'));out('out-work-hours',val('work-hours'));out('out-emergency',val('emergency-channel'));
+        out('out-notice',`${notice} (${numWords(notice)}) dia${notice===1?'':'s'}`);out('out-forum',val('forum'));
+        out('out-sign-city',val('sign-city'));out('out-sign-date',formatDate(val('sign-date')));
+        out('out-sign-client',[val('client-representative'),val('client-role')].filter(Boolean).join(' — '));out('out-sign-provider',val('provider-name'));
+        out('out-witness1-name',val('witness1-name'));out('out-witness1-cpf',val('witness1-cpf'));out('out-witness2-name',val('witness2-name'));out('out-witness2-cpf',val('witness2-cpf'));
+        document.body.classList.add('generated');window.scrollTo({top:0,behavior:'smooth'});
+      });
+      $('edit-contract').addEventListener('click',()=>{document.body.classList.remove('generated');window.scrollTo({top:0,behavior:'smooth'});});
+      $('print-contract').addEventListener('click',()=>window.print());
+      form.addEventListener('reset',()=>setTimeout(()=>{hideError();document.body.classList.remove('generated');updateTotal();window.scrollTo({top:0,behavior:'smooth'});},0));
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Preencher proposta | MP Serviços</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+@page{size:A4 portrait;margin:0}
+*{box-sizing:border-box}
+:root{--navy:#0F2233;--blue:#2E5A88;--blue2:#4F7FB3;--mist:#F4F6F8;--gray:#5F6B73;--mid:#9AA3A8;--line:#C7CED4;--white:#fff;--green:#2E7D32}
+html,body{margin:0;padding:0;background:#e9edf0;color:var(--navy);font-family:Montserrat,"Segoe UI",Arial,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.toolbar{position:fixed;z-index:99;right:18px;bottom:18px;display:flex;gap:8px}
+.toolbar button{border:0;border-radius:999px;background:var(--navy);color:#fff;padding:12px 18px;font-weight:800;cursor:pointer;box-shadow:0 4px 16px #0f223344}
+.toolbar button.secondary{background:var(--blue)}
+.page{width:210mm;height:297mm;position:relative;overflow:hidden;background:var(--white);margin:10mm auto;padding:18mm 20mm 23mm;box-shadow:0 6px 24px #172b3a33;page-break-after:always;break-after:page}
+.page:last-of-type{page-break-after:auto;break-after:auto}
+.page-head{display:flex;align-items:center;justify-content:space-between;min-height:17mm;padding-bottom:4mm;border-bottom:1px solid var(--line);margin-bottom:10mm}
+/* Símbolo da MP Serviços com o halo luminoso do site de referência. */
+.logo-slot{width:42mm;height:18mm;display:flex;align-items:center;justify-content:center;border:0;flex:0 0 auto}
+.logo-halo{position:relative;width:16mm;height:16mm;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.logo-halo::before{content:"";position:absolute;inset:-4mm;background:radial-gradient(circle,rgba(79,127,179,.5) 0%,rgba(79,127,179,.18) 45%,transparent 75%);border-radius:50%;z-index:0;pointer-events:none}
+.logo-halo img{position:relative;z-index:1;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 0 2mm rgba(79,127,179,.58)) brightness(1.08)}
+.cover-slot{width:54mm;height:30mm;margin-bottom:17mm;border:1px dashed var(--mid);border-radius:2mm}
+.head-label{font-size:7pt;letter-spacing:.15em;text-transform:uppercase;color:var(--gray);font-weight:800;text-align:right}
+.page-no{position:absolute;left:20mm;right:20mm;bottom:10mm;border-top:1px solid var(--line);padding-top:3mm;display:flex;justify-content:space-between;color:var(--gray);font-size:7.5pt;letter-spacing:.06em;text-transform:uppercase}
+.cover{background:var(--navy);color:var(--white);padding:20mm}
+.cover .logo-slot{width:54mm;height:30mm;margin-left:auto;margin-bottom:20mm}.cover .logo-halo{width:26mm;height:26mm}
+.cover-label{font-size:8pt;letter-spacing:.23em;text-transform:uppercase;color:#9FB9D9;font-weight:800;display:flex;align-items:center;gap:3mm;margin-bottom:7mm}
+.cover-label:before{content:"";width:10mm;height:1.2mm;background:var(--blue2)}
+.cover h1{font-size:31pt;line-height:1.08;letter-spacing:-.02em;text-transform:uppercase;margin:0 0 8mm;max-width:158mm}
+.cover h1 span{color:#9FB9D9}
+.cover-lead{max-width:145mm;font-size:13pt;line-height:1.5;color:#E4EAF0}
+.cover-client{margin-top:22mm;border-left:1.4mm solid var(--blue2);padding:4mm 0 4mm 6mm}
+.cover-client small{display:block;color:#9FB9D9;text-transform:uppercase;letter-spacing:.16em;font-size:7.5pt;font-weight:800;margin-bottom:2mm}
+.cover-client strong{font-size:16pt;line-height:1.25}
+.cover-meta{position:absolute;left:20mm;right:20mm;bottom:24mm;display:flex;justify-content:space-between;gap:10mm;border-top:1px solid #ffffff33;padding-top:5mm;font-size:9pt;color:#D6E0E7}
+.kicker{font-size:7.5pt;letter-spacing:.2em;text-transform:uppercase;font-weight:800;color:var(--blue);margin-bottom:3mm}
+h2{font-size:23pt;line-height:1.1;letter-spacing:-.015em;color:var(--navy);margin:0 0 5mm;text-transform:uppercase}
+h3{font-size:12pt;line-height:1.2;color:var(--navy);margin:0 0 2.5mm}
+p{font-size:10pt;line-height:1.6;color:#37434B;margin:0 0 4mm}
+.lead{font-size:12pt;line-height:1.55;color:#37434B;max-width:165mm;margin-bottom:8mm}
+.rule{height:1.1mm;width:15mm;background:var(--blue);margin:4mm 0 7mm}
+.edit{outline:none;border-radius:1mm}
+
+.token{color:var(--blue);font-weight:700}
+.field-label{font-size:7pt;display:block;text-transform:uppercase;letter-spacing:.13em;color:var(--gray);font-weight:800;margin-bottom:1.5mm}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:4mm 8mm;margin:6mm 0 8mm}
+.info{border-bottom:1px solid var(--line);padding:2mm 0 3mm;min-height:14mm}
+.info strong{font-size:10pt;line-height:1.35;display:block}
+.note{background:var(--mist);border-left:1mm solid var(--blue);padding:4mm 5mm;margin:6mm 0;font-size:9pt;line-height:1.5;color:#37434B}
+.service{border:1px solid var(--line);border-radius:3mm;padding:5mm 6mm;margin:0 0 4mm;display:grid;grid-template-columns:8mm 1fr;gap:3mm;break-inside:avoid}
+.service input[type=checkbox]{width:5mm;height:5mm;accent-color:var(--blue);margin:1mm 0 0}
+.service h3{font-size:11pt}
+.service p{font-size:9pt;margin:0}
+.service small{display:block;margin-top:2mm;color:var(--gray);font-size:8pt}
+.icon{width:7mm;height:7mm;stroke:var(--blue);stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round;vertical-align:middle;margin-right:2mm}
+.pillars{display:grid;grid-template-columns:1fr 1fr;gap:3mm;margin-top:5mm}
+.pillar{background:var(--mist);padding:4mm;border-radius:2mm;min-height:30mm}
+.pillar b{display:block;font-size:9pt;color:var(--navy);margin-bottom:1.5mm}
+.pillar span{display:block;font-size:8.5pt;line-height:1.45;color:#4D5961}
+.steps{counter-reset:step;list-style:none;margin:6mm 0;padding:0}
+.steps li{counter-increment:step;position:relative;padding:0 0 5mm 12mm;margin:0 0 4mm;border-bottom:1px solid var(--line)}
+.steps li:before{content:counter(step,decimal-leading-zero);position:absolute;left:0;top:0;color:var(--blue);font-size:14pt;font-weight:900}
+.steps b{display:block;font-size:10pt;margin-bottom:1mm}
+.steps span{font-size:9pt;line-height:1.5;color:#4D5961}
+table{width:100%;border-collapse:collapse;margin:5mm 0;font-size:8.5pt}
+th{background:var(--navy);color:var(--white);text-align:left;padding:3mm 2.5mm;font-size:7.5pt;text-transform:uppercase;letter-spacing:.08em}
+td{border-bottom:1px solid var(--line);padding:3mm 2.5mm;vertical-align:top;color:#37434B}
+td.center{text-align:center}
+input[type=number],.edit-cell{font:inherit;color:var(--navy);background:transparent;border:0;border-bottom:1px dotted var(--mid);padding:1mm;width:100%;min-width:20mm}
+input[type=number]:focus,.editable-cell:focus{outline:1px solid var(--blue);background:#eef4fa}
+input[type=number]{text-align:right}
+.money-box{background:var(--navy);color:white;border-radius:3mm;padding:6mm;margin-top:5mm;display:flex;justify-content:space-between;align-items:center;gap:6mm}
+.money-box span{font-size:9pt;color:#D6E0E7}
+.money-box strong{font-size:13pt;line-height:1.35;text-align:right;color:#fff}
+.conditions{display:grid;grid-template-columns:1fr 1fr;gap:4mm}
+.condition{border:1px solid var(--line);padding:4mm;border-radius:2mm;min-height:24mm}
+.condition b{display:block;font-size:8pt;text-transform:uppercase;letter-spacing:.08em;color:var(--blue);margin-bottom:2mm}
+.condition p{font-size:9pt;margin:0}
+.signatures{display:grid;grid-template-columns:1fr 1fr;gap:12mm;margin-top:16mm}
+.signature{border-top:1px solid var(--mid);padding-top:3mm;text-align:center;font-size:8pt;color:var(--gray);min-height:17mm}
+.signature strong{display:block;color:var(--navy);font-size:9pt;margin-bottom:1mm}
+.contact-card{background:var(--mist);border-radius:3mm;padding:7mm 8mm;margin-top:7mm}
+.contact-card strong{display:block;font-size:14pt;color:var(--navy);margin-bottom:2mm}
+.contact-card p{margin:1mm 0;font-size:9pt}
+.disclaimer{font-size:8pt;color:var(--gray);line-height:1.5;margin-top:6mm}
+@media print{
+ html,body{width:210mm!important;margin:0!important;padding:0!important;background:#fff!important}
+ .page{width:210mm!important;height:297mm!important;margin:0!important;box-shadow:none!important;overflow:hidden!important;break-inside:avoid;page-break-inside:avoid;break-after:page;page-break-after:always}
+ .page:last-of-type{break-after:auto;page-break-after:auto}
+ .toolbar,.screen-only{display:none!important}
+ .edit:focus,input:focus{background:transparent!important;box-shadow:none!important}
+ input[type=number],.edit-cell{border-bottom:0}
+}
+@media screen and (max-width:800px){.page{width:100%;height:auto;min-height:100vh;margin:0 auto 8mm;padding:12mm 8mm 22mm}.page-no{left:8mm;right:8mm}.cover-meta{left:8mm;right:8mm}.cover{min-height:100vh}.pillars,.conditions,.info-grid,.signatures{grid-template-columns:1fr}.toolbar{right:8px;bottom:8px}.cover h1{font-size:26pt}}
+
+/* Tela de preenchimento em identidade MP. */
+body:not(.generated){min-height:100vh;background:var(--navy);color:#f4f6f8}
+.form-screen{display:block;min-height:100vh;background:radial-gradient(circle at 50% 0,rgba(46,90,136,.24),transparent 42%),var(--navy);color:#f4f6f8}
+.form-header,.form-footer{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px max(24px,calc((100vw - 960px)/2));border-bottom:1px solid #4f7fb355}
+.form-footer{border-top:1px solid #4f7fb355;border-bottom:0;color:#9aa3a8;font-size:12px}
+.form-brand{display:flex;align-items:center;gap:13px}.form-brand .logo-halo{width:54px;height:54px}
+.form-brand strong,.form-brand span{display:block}.form-brand strong{font-size:15px;color:#fff}.form-brand span{font-size:10px;color:#4f7fb3;letter-spacing:1px;font-weight:700}
+.form-tag{border:1px solid #4f7fb355;border-radius:99px;padding:8px 14px;color:#9fb9d9;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.form-shell{width:min(920px,calc(100% - 32px));margin:0 auto;padding:42px 0 52px}
+.form-eyebrow{margin:0 0 8px;color:#4f7fb3;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase}
+.form-shell h1{margin:0;color:#fff;font-size:clamp(28px,4vw,40px);line-height:1.15;letter-spacing:-.8px}
+.form-intro{max-width:720px;margin:12px 0 28px;color:#b7c1c8;font-size:14px;line-height:1.6}
+.form-card{margin:0 0 16px;padding:22px 24px;border:1px solid #4f7fb355;border-radius:10px;background:rgba(31,63,91,.72)}
+.form-card h2{margin:0 0 16px;color:#fff;font-size:17px;letter-spacing:0;text-transform:none;border:0;padding:0}
+.form-help{margin:-5px 0 15px;color:#bac4cb;font-size:12px;line-height:1.5}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px 16px}
+.form-field{display:block;min-width:0}.form-field>span{display:block;margin:0 0 6px;color:#dce4e9;font-size:11px;font-weight:700}.form-field b{color:#9fb9d9}
+.form-field input,.form-field textarea,.service-choice textarea{width:100%;border:1px solid #71889a;border-radius:6px;padding:10px 11px;background:#f8fafb;color:#102b40;font:13px Montserrat,Arial,sans-serif;line-height:1.45}
+.form-field textarea,.service-choice textarea{resize:vertical}.form-field input:focus,.form-field textarea:focus,.service-choice textarea:focus{outline:2px solid #4f7fb3;outline-offset:1px}
+.service-choice{margin:0 0 12px;padding:13px 14px;border:1px solid #4f7fb355;border-radius:7px;background:rgba(15,34,51,.42)}
+.choice-title{display:flex;align-items:center;gap:9px;margin:0 0 10px;color:#fff;font-size:13px;font-weight:700}.choice-title input{width:17px;height:17px;accent-color:#4f7fb3}
+.service-choice textarea{display:block;background:#f8fafb}.price-entry{padding:12px 14px;margin:0 0 10px;border:1px solid #4f7fb355;border-radius:7px;background:rgba(15,34,51,.42)}
+.price-entry>strong{display:block;margin-bottom:10px;color:#fff;font-size:13px}.conditions-form{margin-top:16px}
+.form-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}.form-actions button{border:0;border-radius:7px;padding:13px 18px;font:700 13px Montserrat,Arial,sans-serif;cursor:pointer}
+.primary-action{background:#2e5a88;color:#fff}.primary-action:hover{background:#4f7fb3}.reset-action{border:1px solid #71889a!important;background:transparent;color:#dce4e9}
+.form-note{margin:12px 0 0;color:#9aa3a8;font-size:11px;line-height:1.5}
+.selection-mark{display:inline-flex;align-items:center;justify-content:center;width:5mm;height:5mm;border:1px solid var(--blue);border-radius:1mm;color:var(--blue);font-size:12pt;font-weight:800;line-height:1}
+.fee-display{display:block;text-align:right;font-weight:700;color:var(--navy)}
+.page{display:none}
+.toolbar{display:none}.generated .toolbar{display:flex}
+.generated .page{display:block}
+.generated .form-screen{display:none}
+.toolbar button{font:700 12px Montserrat,Arial,sans-serif}
+@media print{
+ .toolbar,.screen-only{display:none!important}
+ body:not(.generated) .form-screen{display:block!important}
+ body:not(.generated) .page{display:none!important}
+ .generated .form-screen{display:none!important}
+ .generated .page{display:block!important}
+}
+@media screen and (max-width:800px){.form-header,.form-footer{padding:12px 16px}.form-tag{font-size:9px}.form-shell{padding:30px 0 38px}.form-card{padding:18px 16px}.form-grid{grid-template-columns:1fr}.form-footer{align-items:flex-start;flex-direction:column}}
+
+</style>
+</head>
+<body>
+<div class="form-screen" id="form-screen">
+  <header class="form-header"><div class="form-brand"><div class="logo-halo"><img src="https://mpsmdem-estrela.github.io/MP_Servicos/logo.png" alt="MP Serviços"></div><div><strong>MP Serviços</strong><span>Síndico Profissional</span></div></div><span class="form-tag">Gerador de proposta</span></header>
+  <main class="form-shell">
+    <p class="form-eyebrow">Proposta comercial</p>
+    <h1>Preencha os dados da proposta</h1>
+    <p class="form-intro">Complete os campos nesta tela. Ao gerar a proposta, os dados serão organizados no documento pronto para revisar e imprimir.</p>
+    <form id="proposal-form">
+      <section class="form-card"><h2>1. Condomínio e proposta</h2>
+        <div class="form-grid">
+          <label class="form-field"><span>Nome completo do condomínio <b>*</b></span><input id="condo" required autocomplete="organization" placeholder="Ex.: Condomínio Residencial ..."></label>
+          <label class="form-field"><span>Endereço do condomínio</span><input id="address" placeholder="Rua, número, bairro, cidade/UF"></label>
+          <label class="form-field"><span>Representante e função <b>*</b></span><input id="representative" required placeholder="Nome — síndico(a), conselho, etc."></label>
+          <label class="form-field"><span>Data da proposta <b>*</b></span><input id="proposal-date" type="date" required></label>
+          <label class="form-field"><span>Cidade / local</span><input id="city" value="Manaus/AM"></label>
+          <label class="form-field"><span>Contato do prestador — telefone</span><input id="provider-phone" value="(92) 98553-7155" autocomplete="tel"></label>
+          <label class="form-field"><span>Contato do prestador — e-mail</span><input id="provider-email" type="email" value="mpsmdem@gmail.com" autocomplete="email"></label>
+        </div>
+      </section>
+
+      <section class="form-card"><h2>2. Modalidade e escopo</h2>
+        <p class="form-help">Selecione ao menos uma modalidade. As modalidades selecionadas também serão incluídas na tabela de investimento.</p>
+        <div class="service-choice"><label class="choice-title"><input type="checkbox" id="service-0"><span>Síndico profissional</span></label><textarea id="scope-0" rows="2" placeholder="Escopo específico, alçadas e frequência de atendimento"></textarea></div>
+        <div class="service-choice"><label class="choice-title"><input type="checkbox" id="service-1"><span>Assessoria condominial</span></label><textarea id="scope-1" rows="2" placeholder="Temas prioritários e horas de atendimento"></textarea></div>
+        <div class="service-choice"><label class="choice-title"><input type="checkbox" id="service-2"><span>Diagnóstico e plano de ação</span></label><textarea id="scope-2" rows="2" placeholder="Áreas, período analisado e entregáveis"></textarea></div>
+        <label class="form-field"><span>Entregas previstas</span><textarea id="deliverables" rows="3" placeholder="Ex.: relatório mensal, painel de indicadores, plano de manutenção..."></textarea></label>
+      </section>
+
+      <section class="form-card"><h2>3. Investimento e condições</h2>
+        <p class="form-help">Informe o valor e a periodicidade de cada modalidade selecionada. Nenhum valor será presumido.</p>
+        <div class="price-entry"><strong>Síndico profissional</strong><div class="form-grid"><label class="form-field"><span>Periodicidade</span><input id="period-0" value="Mensal"></label><label class="form-field"><span>Valor (R$)</span><input id="fee-0" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0,00"></label></div></div>
+        <div class="price-entry"><strong>Assessoria condominial</strong><div class="form-grid"><label class="form-field"><span>Periodicidade</span><input id="period-1" value="Mensal"></label><label class="form-field"><span>Valor (R$)</span><input id="fee-1" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0,00"></label></div></div>
+        <div class="price-entry"><strong>Diagnóstico e plano de ação</strong><div class="form-grid"><label class="form-field"><span>Periodicidade</span><input id="period-2" value="Por projeto"></label><label class="form-field"><span>Valor (R$)</span><input id="fee-2" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0,00"></label></div></div>
+        <div class="form-grid conditions-form">
+          <label class="form-field"><span>Forma e data de pagamento</span><input id="payment" placeholder="A definir"></label>
+          <label class="form-field"><span>Início previsto</span><input id="start-date" placeholder="A definir após aprovação"></label>
+          <label class="form-field"><span>Validade da proposta</span><input id="validity" placeholder="Prazo de validade"></label>
+          <label class="form-field"><span>Despesas reembolsáveis / custos externos</span><input id="expenses" placeholder="Informar regra ou escrever Não aplicável"></label>
+        </div>
+      </section>
+
+      <section class="form-card"><h2>4. Início e aceite</h2>
+        <label class="form-field"><span>Documentos e informações iniciais</span><textarea id="documents" rows="3" placeholder="Ex.: convenção, regimento, orçamento, balancetes, contratos..."></textarea></label>
+        <label class="form-field"><span>Nome do representante para o aceite</span><input id="acceptance-name" placeholder="Se diferente do representante informado acima"></label>
+      </section>
+      <div class="form-actions"><button class="primary-action" type="submit">Gerar proposta para revisão</button><button class="reset-action" type="reset">Limpar preenchimento</button></div>
+      <p class="form-note">A proposta gerada é editável apenas por meio deste formulário. Revise escopo, valores e condições antes de imprimir.</p>
+    </form>
+  </main>
+  <footer class="form-footer"><div class="form-brand"><div class="logo-halo"><img src="https://mpsmdem-estrela.github.io/MP_Servicos/logo.png" alt="MP Serviços"></div><div><strong>MP Serviços</strong><span>Gestão com método e rigor</span></div></div><span>Manaus/AM · (92) 98553-7155</span></footer>
+</div>
+<!-- Biblioteca padrão dos documentos MP: ícones Lucide em SVG inline, traço 1.8 e pontas arredondadas. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-building" viewBox="0 0 24 24"><path d="M3 21h18M5 21V5l7-3 7 3v16M9 9h.01M15 9h.01M9 13h.01M15 13h.01M10 21v-4h4v4"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18M18 17V9M13 17V5M8 17v-3"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m9 12 2 2 4-4"/></symbol>
+</defs></svg>
+<div class="toolbar screen-only"><button id="edit-proposal" class="secondary" type="button">Voltar para edição</button><button id="print-proposal" type="button">Imprimir / PDF</button></div>
+
+<section class="page cover">
+  <!-- ÁREA RESERVADA PARA INSERÇÃO POSTERIOR DA LOGO APROVADA; manter dimensões e posição. -->
+  <div class="logo-slot" aria-label="Logo MP Serviços"><div class="logo-halo"><img src="https://mpsmdem-estrela.github.io/MP_Servicos/logo.png" alt="MP Serviços"></div></div>
+  <div class="cover-label">Proposta de serviços</div>
+  <h1>Gestão condominial com <span>método e transparência</span></h1>
+  <p class="cover-lead">Uma proposta de atuação construída para a realidade do condomínio, com rigor financeiro, organização operacional e prestação de contas clara.</p>
+  <div class="cover-client"><small>Proposta para</small><strong class="edit">[Nome do condomínio]</strong></div>
+  <div class="cover-meta"><span>MP Serviços · Administração condominial</span><span class="edit">[Manaus/AM · data]</span></div>
+</section>
+
+<section class="page">
+  <header class="page-head"><div class="logo-slot" aria-label="Logo MP Serviços"><div class="logo-halo"><img src="https://mpsmdem-estrela.github.io/MP_Servicos/logo.png" alt="MP Serviços"></div></div><div class="head-label">Proposta de serviços<br>MP Serviços</div></header>
+  <div class="kicker">01 · Apresentação</div><h2>Uma gestão profissional, orientada por dados</h2><div class="rule"></div>
+  <p class="lead">Ao(À) <span class="edit token">[Nome do(a) síndico(a) ou representante]</span>,<br><span class="edit token">[Nome do condomínio]</span></p>
+  <p>Apresento esta proposta para apoiar a administração do condomínio com processos claros, controles financeiros consistentes e acompanhamento da operação. O trabalho parte das necessidades e prioridades definidas com a sindicância e os representantes do condomínio.</p>
+  <p>A experiência em gestão administrativa, financeira, controladoria e auditoria sustenta uma atuação voltada à previsibilidade, à conservação patrimonial e à transparência nas decisões e na prestação de contas.</p>
+  <div class="info-grid">
+    <div class="info"><span class="field-label">Condomínio</span><strong class="edit">[Nome completo]</strong></div>
+    <div class="info"><span class="field-label">Endereço</span><strong class="edit">[Endereço do condomínio]</strong></div>
+    <div class="info"><span class="field-label">Representante</span><strong class="edit">[Nome e função]</strong></div>
+    <div class="info"><span class="field-label">Data da proposta</span><strong class="edit">[DD/MM/AAAA]</strong></div>
+  </div>
+  <div class="note"><b>Premissa de trabalho.</b> O escopo final, os limites de autoridade, a rotina de atendimento e os indicadores serão acordados com o condomínio antes do início da prestação dos serviços.</div>
+  <p>O objetivo desta proposta é apresentar modalidades de atuação e registrar campos para definição conjunta do escopo, dos valores e das condições comerciais.</p>
+  <footer class="page-no"><span>MP Serviços · Proposta comercial</span><span>02 / 06</span></footer>
+</section>
+
+<section class="page">
+  <header class="page-head"><div class="logo-slot" aria-label="Logo MP Serviços"><div class="logo-halo"><img src="https://mpsmdem-estrela.github.io/MP_Servicos/logo.png" alt="MP Serviços"></div></div><div class="head-label">Escopo de atuação<br>MP Serviços</div></header>
+  <div class="kicker">02 · Modalidades</div><h2>Serviços propostos</h2><div class="rule"></div>
+  <p class="lead">Marque a modalidade que será objeto da contratação e ajuste o escopo à realidade do condomínio.</p>
+  <div class="service"><span class="selection-mark service-mark" aria-hidden="true">☐</span><div><h3><svg class="icon"><use href="#i-building"/></svg>Síndico profissional</h3><p>Assunção da gestão administrativa, financeira e operacional do condomínio, com representação nos limites definidos em contrato, convenção e deliberações aplicáveis.</p><small>Escopo específico, alçadas e frequência: <span class="edit token">[preencher]</span></small></div></div>
+  <div class="service"><span class="selection-mark service-mark" aria-hidden="true">☐</span><div><h3><svg class="icon"><use href="#i-chart"/></svg>Assessoria condominial</h3><p>Apoio técnico e financeiro à sindicância, com organização de controles, análise de despesas, estruturação de rotinas e implantação de processos.</p><small>Temas prioritários e horas de atendimento: <span class="edit token">[preencher]</span></small></div></div>
+  <div class="service"><span class="selection-mark service-mark" aria-hidden="true">☐</span><div><h3><svg class="icon"><use href="#i-shield"/></svg>Diagnóstico e plano de ação</h3><p>Avaliação delimitada da situação atual, incluindo análise de contratos, finanças e infraestrutura, seguida de recomendações priorizadas.</p><small>Áreas, período analisado e entregáveis: <span class="edit token">[preencher]</span></small></div></div>
+  <div class="note"><b>Delimitação necessária.</b> A proposta não presume poderes de representação, aprovação de despesas ou execução de obras. Esses limites devem ser definidos formalmente com o condomínio.</div>
+  <footer class="page-no"><span>MP Serviços · Proposta comercial</span><span>03 / 06</span></footer>
+</section>
+
+<section class="page">
+  <header class="page-head"><div class="logo-slot" aria-label="Logo MP Serviços"><div class="logo-halo"><img src="https://mpsmdem-estrela.github.io/MP_Servicos/logo.png" alt="MP Serviços"></div></div><div class="head-label">Método e entregas<br>MP Serviços</div></header>
+  <div class="kicker">03 · Método</div><h2>Os cinco pilares da gestão</h2><div class="rule"></div>
+  <p class="lead">A atuação combina planejamento, rotina de acompanhamento e registro das decisões, com entregas ajustadas ao escopo contratado.</p>
+  <div class="pillars">
+    <div class="pillar"><b>1. Gestão financeira e orçamentária</b><span>Planejamento orçamentário, acompanhamento de arrecadação e despesas, segregação de fundos com destinação específica e relatórios financeiros compreensíveis.</span></div>
+    <div class="pillar"><b>2. Patrimônio e infraestrutura</b><span>Planejamento preventivo de manutenção, revisão de contratos e acompanhamento de cotações, respeitando aprovações e orçamento do condomínio.</span></div>
+    <div class="pillar"><b>3. Operação e pessoas</b><span>Organização de rotinas, fluxos de atendimento, checklists e acompanhamento da execução de serviços por equipes e fornecedores.</span></div>
+    <div class="pillar"><b>4. Segurança e convivência</b><span>Acompanhamento das condições de sistemas de segurança e áreas comuns, com registro de pendências e encaminhamento de ações.</span></div>
+    <div class="pillar"><b>5. Governança e transparência</b><span>Organização documental e rastreabilidade das decisões, observando convenção, regimento, deliberações e legislação aplicável.</span></div>
+    <div class="pillar"><b>Ferramentas de gestão</b><span>Relatórios visuais, planilhas e ferramentas digitais para dar visibilidade a indicadores, tarefas e prestação de contas.</span></div>
+  </div>
+  <div class="note"><b>Entregas a confirmar no escopo:</b> <span class="edit token">[relatório mensal, painel de indicadores, plano de manutenção, matriz de contratos ou outras entregas]</span>.</div>
+  <footer class="page-no"><span>MP Serviços · Proposta comercial</span><span>04 / 06</span></footer>
+</section>
+
+<section class="page">
+  <header class="page-head"><div class="logo-slot" aria-label="Logo MP Serviços"><div class="logo-halo"><img src="https://mpsmdem-estrela.github.io/MP_Servicos/logo.png" alt="MP Serviços"></div></div><div class="head-label">Investimento e condições<br>MP Serviços</div></header>
+  <div class="kicker">04 · Condições comerciais</div><h2>Investimento proposto</h2><div class="rule"></div>
+  <p class="lead">Selecione os itens contratados e preencha os valores acordados. O total considera apenas linhas selecionadas e preenchidas.</p>
+  <table>
+    <thead><tr><th style="width:11mm">Incluir</th><th>Serviço</th><th style="width:30mm">Periodicidade</th><th style="width:35mm;text-align:right">Valor (R$)</th></tr></thead>
+    <tbody>
+      <tr class="fee-row"><td class="center"><span class="selection-mark fee-mark" aria-hidden="true">☐</span></td><td>Síndico profissional</td><td><span class="edit-cell">[definir]</span></td><td><span class="fee-display">—</span></td></tr>
+      <tr class="fee-row"><td class="center"><span class="selection-mark fee-mark" aria-hidden="true">☐</span></td><td>Assessoria condominial</td><td><span class="edit-cell">[definir]</span></td><td><span class="fee-display">—</span></td></tr>
+      <tr class="fee-row"><td class="center"><span class="selection-mark fee-mark" aria-hidden="true">☐</span></td><td>Diagnóstico e plano de ação</td><td><span class="edit-cell">[definir]</span></td><td><span class="fee-display">—</span></td></tr>
+    </tbody>
+  </table>
+  <div class="money-box"><span>Valores agrupados por periodicidade</span><strong id="total">—</strong></div>
+  <div class="conditions" style="margin-top:7mm">
+    <div class="condition"><b>Forma e data de pagamento</b><p class="edit token">[Preencher]</p></div>
+    <div class="condition"><b>Início previsto</b><p class="edit token">[Preencher após aprovação]</p></div>
+    <div class="condition"><b>Validade desta proposta</b><p class="edit token">[Definir prazo]</p></div>
+    <div class="condition"><b>Despesas reembolsáveis / custos externos</b><p class="edit token">[Definir se aplicável e o procedimento de aprovação]</p></div>
+  </div>
+  <p class="disclaimer">Valores, tributos, reajustes, despesas, prazos e condições de encerramento devem ser revisados e formalizados antes da assinatura. Nenhum valor ou prazo foi presumido neste modelo.</p>
+  <footer class="page-no"><span>MP Serviços · Proposta comercial</span><span>05 / 06</span></footer>
+</section>
+
+<section class="page">
+  <header class="page-head"><div class="logo-slot" aria-label="Logo MP Serviços"><div class="logo-halo"><img src="https://mpsmdem-estrela.github.io/MP_Servicos/logo.png" alt="MP Serviços"></div></div><div class="head-label">Aprovação e contato<br>MP Serviços</div></header>
+  <div class="kicker">05 · Próximos passos</div><h2>Alinhamento, aprovação e início</h2><div class="rule"></div>
+  <ol class="steps">
+    <li><b>Validar escopo e prioridades</b><span>Confirmar modalidade, entregas, frequência de atendimento, interlocutores e limites de atuação.</span></li>
+    <li><b>Formalizar condições comerciais</b><span>Preencher investimento, forma de pagamento, prazos, despesas e demais condições negociadas.</span></li>
+    <li><b>Formalizar a contratação</b><span>Registrar responsabilidades, poderes, rotina de prestação de contas e regras de aprovação em instrumento próprio.</span></li>
+    <li><b>Realizar a reunião de início</b><span>Reunir documentos essenciais, definir canais de comunicação e estabelecer o plano de trabalho inicial.</span></li>
+  </ol>
+  <div class="note"><b>Documentos e informações iniciais:</b> <span class="edit token">[convenção, regimento interno, orçamento vigente, balancetes, contratos, calendário de obrigações e contatos autorizados — ajustar ao escopo]</span>.</div>
+  <h3 style="margin-top:8mm">Aceite da proposta</h3>
+  <p>O aceite abaixo registra a intenção de prosseguir com a contratação nos termos preenchidos e revisados pelas partes. A prestação de serviços começa após a formalização contratual aplicável.</p>
+  <div class="signatures">
+    <div class="signature"><strong>MP Serviços</strong>Nome e assinatura do prestador · Data</div>
+    <div class="signature"><strong class="edit">[Nome do representante do condomínio]</strong>Condomínio · Data</div>
+  </div>
+  <div class="contact-card">
+    <strong>Michell Patrick de Souza Moraes</strong>
+    <p>Síndico Profissional &amp; Assessor Condominial</p>
+    <p class="provider-contact">Manaus/AM · (92) 98553-7155</p>
+    <p class="provider-email">mpsmdem@gmail.com · linkedin.com/in/michellpatrick</p>
+  </div>
+  <footer class="page-no"><span>MP Serviços · Proposta comercial</span><span>06 / 06</span></footer>
+</section>
+
+<script>
+(() => {
+  const form = document.getElementById('proposal-form');
+  const pages = [...document.querySelectorAll('.page')];
+  const $ = (selector, root=document) => root.querySelector(selector);
+  const $$ = (selector, root=document) => [...root.querySelectorAll(selector)];
+  const value = id => document.getElementById(id).value.trim();
+  const text = (el, content) => { if (el) el.textContent = content; };
+  const fallback = (id, replacement='[A definir]') => value(id) || replacement;
+  const formatDate = raw => raw ? new Date(raw + 'T12:00:00').toLocaleDateString('pt-BR') : '[Data a definir]';
+  const money = raw => Number(raw).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    const selected = [0,1,2].map(i => document.getElementById(`service-${i}`).checked);
+    if (!selected.some(Boolean)) { alert('Selecione ao menos uma modalidade de serviço.'); return; }
+    for (let i=0;i<3;i++) {
+      if (selected[i] && document.getElementById(`fee-${i}`).value === '') {
+        alert('Informe o valor da modalidade selecionada: ' + ['Síndico profissional','Assessoria condominial','Diagnóstico e plano de ação'][i] + '.');
+        document.getElementById(`fee-${i}`).focus(); return;
+      }
+    }
+    const condo = fallback('condo');
+    const rep = fallback('representative');
+    const date = formatDate(value('proposal-date'));
+    const city = fallback('city','Manaus/AM');
+
+    text($('.cover-client strong', pages[0]), condo);
+    text($('.cover-meta .edit', pages[0]), `${city} · ${date}`);
+
+    const recipient = $$('.lead .edit', pages[1]);
+    text(recipient[0], rep); text(recipient[1], condo);
+    const details = $$('.info-grid .edit', pages[1]);
+    text(details[0], condo);
+    text(details[1], fallback('address','[Endereço a definir]'));
+    text(details[2], rep);
+    text(details[3], date);
+
+    $$('.service', pages[2]).forEach((service,i) => {
+      text($('.service-mark',service), selected[i] ? '✓' : '');
+      text($('.service small .edit',service), selected[i] ? fallback(`scope-${i}`,'[Escopo a definir com o condomínio]') : 'Não incluído nesta proposta.');
+    });
+    text($('.note .edit',pages[3]), fallback('deliverables','[Entregas a definir]'));
+
+    const priceRows = $$('.fee-row',pages[4]);
+    for (let i=0;i<3;i++) {
+      const row = priceRows[i];
+      const amount = document.getElementById(`fee-${i}`).value;
+      text($('.fee-mark',row), selected[i] ? '✓' : '');
+      text($('.edit-cell',row), selected[i] ? fallback(`period-${i}`) : '—');
+      text($('.fee-display',row), selected[i] ? money(amount) : '—');
+    }
+    const total = selected.reduce((sum,on,i) => sum + (on ? Number(document.getElementById(`fee-${i}`).value || 0) : 0),0);
+    const grouped = {};
+    for (let i=0;i<3;i++) if (selected[i]) {
+      const period = fallback(`period-${i}`,'Periodicidade a definir');
+      grouped[period] = (grouped[period] || 0) + Number(document.getElementById(`fee-${i}`).value || 0);
+    }
+    text($('#total',pages[4]), Object.entries(grouped).map(([period,sum]) => `${money(sum)} / ${period}`).join(' · '));
+    text($('.lead',pages[4]), 'Os valores abaixo correspondem às modalidades selecionadas e estão agrupados por periodicidade.');
+    const terms = $$('.condition p',pages[4]);
+    ['payment','start-date','validity','expenses'].forEach((id,i) => text(terms[i],fallback(id)));
+
+    text($('.note .edit',pages[5]), fallback('documents','[Documentos a confirmar]'));
+    text($('.signature .edit',pages[5]), fallback('acceptance-name',rep));
+    const contact = $('.provider-contact',pages[5]);
+    text(contact, `${city} · ${fallback('provider-phone','[Telefone a definir]')}`);
+    text($('.provider-email',pages[5]), `${fallback('provider-email','[E-mail a definir]')} · linkedin.com/in/michellpatrick`);
+
+    document.body.classList.add('generated');
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+
+  $('#edit-proposal').addEventListener('click', () => {
+    document.body.classList.remove('generated');
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+  $('#print-proposal').addEventListener('click', () => window.print());
+  form.addEventListener('reset', () => {
+    setTimeout(() => { document.body.classList.remove('generated'); window.scrollTo({top:0,behavior:'smooth'}); }, 0);
+  });
+})();
+</script>
+</body>
+</html>
