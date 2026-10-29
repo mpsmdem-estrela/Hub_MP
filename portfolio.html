@@ -138,6 +138,75 @@
     .footer-copy { color: var(--cinza-metalico); font-size: 11px; }
     .footer-copy strong { display: block; color: var(--branco); font-size: 12px; }
     .footer-contact { color: var(--cinza-metalico); font-size: 11px; text-align: right; }
+    /* ===== NOVOS ESTILOS: SEÇÃO RESULTADOS (ANTÚRIO) ===== */
+    .grid-fotos {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .foto-card {
+      background: var(--branco);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #E2E8F0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+    .foto-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      display: block;
+    }
+    .foto-card p {
+      margin: 0;
+      padding: 12px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--azul-institucional);
+      background: var(--branco);
+    }
+    .grid-outras-melhorias {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+    .melhoria-card {
+      background: var(--branco);
+      border-radius: 8px;
+      padding: 20px 16px;
+      text-align: center;
+      border: 1px solid #E2E8F0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .melhoria-card i {
+      font-size: 28px;
+      color: var(--azul-tecnico);
+      margin-bottom: 12px;
+    }
+    .melhoria-card p {
+      margin: 0;
+      font-size: 12px;
+      color: var(--azul-institucional);
+      line-height: 1.4;
+      font-weight: 500;
+    }
+    
+    /* Responsividade para os grids */
+    @media (max-width: 900px) {
+      .grid-outras-melhorias { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 720px) {
+      .grid-fotos { grid-template-columns: 1fr; }
+      .grid-outras-melhorias { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .grid-outras-melhorias { grid-template-columns: 1fr; }
+    }
 
     @page { size: A4; margin: 15mm 16mm 17mm; }
     @media print {
@@ -199,6 +268,9 @@
       .footer-contact { text-align: left; }
     }
   </style>
+  <!-- Biblioteca de Ícones Phosphor (para os ícones da seção Antúrio) -->
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css" />
 </head>
 <body>
   <header class="site-header">
@@ -242,13 +314,98 @@
       </div>
       <div class="section-panel">
         <p>Administrador com mais de 20 anos de experiência em gestão financeira, controladoria e auditoria, com trajetória sólida na indústria (Moto Honda, Hitachi Astemo) e no terceiro setor (COIAB). Minha transição para a gestão condominial não foi um acidente, mas uma aplicação estratégica do que há de mais moderno em governança corporativa para o dia a dia do condomínio.</p>
-        <p>Formei-me Síndico Profissional e em Administração de Condomínios, antes de assumir a gestão do Condomínio Residencial Jardim Paradiso Antúrio, onde atuei por 4 anos e também como conselheiro fiscal. Conheço o condomínio dos dois lados: o controle e a gestão.</p>
+        <p>Fiz o curso presencial em São Paulo de Síndico Profissional e de administrador de Condomínios, antes de assumir a gestão do Condomínio Residencial Jardim Paradiso Antúrio, onde atuei por 4 anos e também como conselheiro fiscal. Conheço o condomínio dos dois lados: o controle e a gestão.</p>
         <p>O diferencial não é apenas “administrar”. É aplicar controles internos, análise de custos e transparência para garantir que o dinheiro do condômino seja tratado com o mesmo rigor de uma grande empresa, porque é. Não trabalho com “achismos” — cada decisão tem método, lastro técnico e respaldo documental.</p>
         <p>Acredito em gestão participativa: as decisões são tomadas com o conselho e com os moradores. Os resultados são de todos — não do síndico.</p>
         <div class="credentials"><strong>Credenciais:</strong> MBA em Finanças, Controladoria e Auditoria · MBA em Gestão de Projetos e Processos (artigo nota 9,9 sobre governança em OSCs) · MBA em Gestão da Qualidade · MBA em Gestão de Pessoas · Formação em Síndico Profissional (72h) · Graduação em Administração.</div>
       </div>
-    </section>
 
+    </section>
+    <!-- ===== NOVA SEÇÃO ANTÚRIO (CORRIGIDA E INDEPENDENTE) ===== -->
+    <section class="content-section" aria-labelledby="resultados-titulo">
+      <div class="section-heading">
+        <p class="section-kicker">Resultados em campo</p>
+        <h2 id="resultados-titulo">O método aplicado na prática</h2>
+      </div>
+      
+      <div class="section-panel">
+        <p style="margin-bottom: 24px;">Obras e melhorias entregues no Condomínio Jardim Paradiso Antúrio durante 4 anos de gestão.</p>
+        
+        <!-- Grid de 4 Cards de Números -->
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px;">
+          <div style="background: rgba(15,34,51,.4); padding: 20px; border-radius: 8px; border: 1px solid var(--borda);">
+            <i class="ph-bold ph-currency-circle-dollar" style="font-size: 28px; color: var(--azul-claro); margin-bottom: 12px; display: block;"></i>
+            <div style="font-size: 28px; font-weight: 800; color: var(--branco); line-height: 1.1; margin-bottom: 4px;">R$ 36 mil</div>
+            <div style="font-size: 11px; font-weight: 700; color: var(--cinza-metalico); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">Economizados / ano</div>
+            <p style="font-size: 13px; margin: 0;">Revisão de contratos de serviços terceirizados.</p>
+          </div>
+          <div style="background: rgba(15,34,51,.4); padding: 20px; border-radius: 8px; border: 1px solid var(--borda);">
+            <i class="ph-bold ph-buildings" style="font-size: 28px; color: var(--azul-claro); margin-bottom: 12px; display: block;"></i>
+            <div style="font-size: 28px; font-weight: 800; color: var(--branco); line-height: 1.1; margin-bottom: 4px;">13 Blocos</div>
+            <div style="font-size: 11px; font-weight: 700; color: var(--cinza-metalico); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">Impermeabilizados</div>
+            <p style="font-size: 13px; margin: 0;">Eliminação de infiltrações (26 unidades A/B).</p>
+          </div>
+          <div style="background: rgba(15,34,51,.4); padding: 20px; border-radius: 8px; border: 1px solid var(--borda);">
+            <i class="ph-bold ph-shield-check" style="font-size: 28px; color: var(--azul-claro); margin-bottom: 12px; display: block;"></i>
+            <div style="font-size: 28px; font-weight: 800; color: var(--branco); line-height: 1.1; margin-bottom: 4px;">100%</div>
+            <div style="font-size: 11px; font-weight: 700; color: var(--cinza-metalico); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">Dos blocos com CFTV</div>
+            <p style="font-size: 13px; margin: 0;">Revitalização do monitoramento e proteção perimetral.</p>
+          </div>
+          <div style="background: rgba(15,34,51,.4); padding: 20px; border-radius: 8px; border: 1px solid var(--borda);">
+            <i class="ph-bold ph-calendar-check" style="font-size: 28px; color: var(--azul-claro); margin-bottom: 12px; display: block;"></i>
+            <div style="font-size: 28px; font-weight: 800; color: var(--branco); line-height: 1.1; margin-bottom: 4px;">4 Anos</div>
+            <div style="font-size: 11px; font-weight: 700; color: var(--cinza-metalico); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">De gestão</div>
+            <p style="font-size: 13px; margin: 0;">Processos documentados e melhorias na rotina.</p>
+          </div>
+        </div>
+
+        <!-- Grid de Fotos -->
+        <div class="grid-fotos">
+          <div class="foto-card">
+            <!-- Substitua o src abaixo pelo caminho correto da imagem -->
+            <img src="https://mpsmdem-estrela.github.io/MP_Servicos/assets/img/portaria.jpg" alt="Portaria revitalizada" loading="lazy">
+            <p>Portaria revitalizada</p>
+          </div>
+          <div class="foto-card">
+            <img src="https://mpsmdem-estrela.github.io/MP_Servicos/assets/img/piscina.jpg" alt="Piscina com piso novo" loading="lazy">
+            <p>Piscina com piso novo</p>
+          </div>
+          <div class="foto-card">
+            <img src="https://mpsmdem-estrela.github.io/MP_Servicos/assets/img/quadra_poliesportiva.jpg" alt="Quadra poliesportiva reformada" loading="lazy">
+            <p>Quadra poliesportiva reformada</p>
+          </div>
+        </div>
+
+        <!-- Grid de Outras Melhorias (5 Cards Brancos) -->
+        <h3 style="font-size: 20px; color: var(--branco); margin-bottom: 20px;">Outras melhorias realizadas</h3>
+        <div class="grid-outras-melhorias">
+          <div class="melhoria-card">
+            <i class="ph-bold ph-buildings"></i>
+            <p>Reforma do complexo administrativo sem custo para o condomínio.</p>
+          </div>
+          <div class="melhoria-card">
+            <i class="ph-bold ph-trash"></i>
+            <p>Reorganização dos espaços e solução de quatro problemas com uma única reforma da lixeira.</p>
+          </div>
+          <div class="melhoria-card">
+            <i class="ph-bold ph-drop"></i>
+            <p>Melhorias no abastecimento de água, na piscina, na quadra e no playground.</p>
+          </div>
+          <div class="melhoria-card">
+            <i class="ph-bold ph-clipboard-text"></i>
+            <p>Implantação de controles de gás, advertências, multas e encomendas.</p>
+          </div>
+          <div class="melhoria-card">
+            <i class="ph-bold ph-confetti"></i>
+            <p>Realização de eventos de integração entre moradores.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <!-- ===== FIM DA SEÇÃO ANTÚRIO ===== -->
+
+    <!-- Retomando a seção de Pilares corretamente -->
     <section class="content-section" aria-labelledby="pilares-titulo">
       <div class="section-heading">
         <p class="section-kicker">Método de gestão</p>
