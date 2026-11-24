@@ -21,7 +21,7 @@ html,body{margin:0;padding:0;background:#e9edf0;color:var(--navy);font-family:Mo
 .logo-halo{position:relative;width:16mm;height:16mm;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
 .logo-halo::before{content:"";position:absolute;inset:-4mm;background:radial-gradient(circle,rgba(79,127,179,.5) 0%,rgba(79,127,179,.18) 45%,transparent 75%);border-radius:50%;z-index:0;pointer-events:none}
 .logo-halo img{position:relative;z-index:1;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 0 2mm rgba(79,127,179,.58)) brightness(1.08)}
-.cover-slot{width:54mm;height:30mm;margin-bottom:17mm;border:1px dashed var(--mid);border-radius:2mm}
+
 .head-label{font-size:7pt;letter-spacing:.15em;text-transform:uppercase;color:var(--gray);font-weight:800;text-align:right}
 .page-no{position:absolute;left:20mm;right:20mm;bottom:10mm;border-top:1px solid var(--line);padding-top:3mm;display:flex;justify-content:space-between;color:var(--gray);font-size:7.5pt;letter-spacing:.06em;text-transform:uppercase}
 .cover{background:var(--navy);color:var(--white);padding:20mm}
@@ -69,11 +69,12 @@ th{background:var(--navy);color:var(--white);text-align:left;padding:3mm 2.5mm;f
 td{border-bottom:1px solid var(--line);padding:3mm 2.5mm;vertical-align:top;color:#37434B}
 td.center{text-align:center}
 input[type=number],.edit-cell{font:inherit;color:var(--navy);background:transparent;border:0;border-bottom:1px dotted var(--mid);padding:1mm;width:100%;min-width:20mm}
-input[type=number]:focus,.editable-cell:focus{outline:1px solid var(--blue);background:#eef4fa}
+input[type=number]:focus,.edit-cell:focus{outline:1px solid var(--blue);background:#eef4fa}
 input[type=number]{text-align:right}
-.money-box{background:var(--navy);color:white;border-radius:3mm;padding:6mm;margin-top:5mm;display:flex;justify-content:space-between;align-items:center;gap:6mm}
-.money-box span{font-size:9pt;color:#D6E0E7}
-.money-box strong{font-size:13pt;line-height:1.35;text-align:right;color:#fff}
+.financial-summary{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4mm;margin-top:5mm}
+.summary-card{background:var(--mist);padding:4mm;border-radius:2mm;display:flex;flex-direction:column;justify-content:center;border-left:1mm solid var(--blue)}
+.summary-label{font-size:7pt;text-transform:uppercase;letter-spacing:.08em;font-weight:800;color:var(--navy);margin-bottom:2mm}
+.summary-value{font-size:14pt;font-weight:800;color:var(--blue);line-height:1.1}
 .conditions{display:grid;grid-template-columns:1fr 1fr;gap:4mm}
 .condition{border:1px solid var(--line);padding:4mm;border-radius:2mm;min-height:24mm}
 .condition b{display:block;font-size:8pt;text-transform:uppercase;letter-spacing:.08em;color:var(--blue);margin-bottom:2mm}
@@ -86,6 +87,7 @@ input[type=number]{text-align:right}
 .contact-card p{margin:1mm 0;font-size:9pt}
 .disclaimer{font-size:8pt;color:var(--gray);line-height:1.5;margin-top:6mm}
 @media print{
+ @page{size:A4 portrait;margin:0}
  html,body{width:210mm!important;margin:0!important;padding:0!important;background:#fff!important}
  .page{width:210mm!important;height:297mm!important;margin:0!important;box-shadow:none!important;overflow:hidden!important;break-inside:avoid;page-break-inside:avoid;break-after:page;page-break-after:always}
  .page:last-of-type{break-after:auto;page-break-after:auto}
@@ -122,6 +124,8 @@ body:not(.generated){min-height:100vh;background:var(--navy);color:#f4f6f8}
 .primary-action{background:#2e5a88;color:#fff}.primary-action:hover{background:#4f7fb3}.reset-action{border:1px solid #71889a!important;background:transparent;color:#dce4e9}
 .form-note{margin:12px 0 0;color:#9aa3a8;font-size:11px;line-height:1.5}
 .selection-mark{display:inline-flex;align-items:center;justify-content:center;width:5mm;height:5mm;border:1px solid var(--blue);border-radius:1mm;color:var(--blue);font-size:12pt;font-weight:800;line-height:1}
+.selection-mark.is-checked{background:var(--blue)}
+.selection-mark.is-checked::after{content:"";width:2.6mm;height:1.4mm;border-left:.5mm solid #fff;border-bottom:.5mm solid #fff;transform:rotate(-45deg) translateY(-.4mm)}
 .fee-display{display:block;text-align:right;font-weight:700;color:var(--navy)}
 .page{display:none}
 .toolbar{display:none}.generated .toolbar{display:flex}
@@ -156,6 +160,7 @@ body:not(.generated){min-height:100vh;background:var(--navy);color:#f4f6f8}
           <label class="form-field"><span>Cidade / local</span><input id="city" value="Manaus/AM"></label>
           <label class="form-field"><span>Contato do prestador — telefone</span><input id="provider-phone" value="(92) 98553-7155" autocomplete="tel"></label>
           <label class="form-field"><span>Contato do prestador — e-mail</span><input id="provider-email" type="email" value="mpsmdem@gmail.com" autocomplete="email"></label>
+          <label class="form-field"><span>Quantidade de unidades</span><input id="units" type="number" min="1" placeholder="Ex.: 40"></label>
         </div>
       </section>
 
@@ -264,7 +269,11 @@ body:not(.generated){min-height:100vh;background:var(--navy);color:#f4f6f8}
       <tr class="fee-row"><td class="center"><span class="selection-mark fee-mark" aria-hidden="true">☐</span></td><td>Diagnóstico e plano de ação</td><td><span class="edit-cell">[definir]</span></td><td><span class="fee-display">—</span></td></tr>
     </tbody>
   </table>
-  <div class="money-box"><span>Valores agrupados por periodicidade</span><strong id="total">—</strong></div>
+  <div class="financial-summary">
+    <div class="summary-card"><span class="summary-label">VALOR POR UNIDADE</span><strong class="summary-value" id="val-unit">—</strong></div>
+    <div class="summary-card"><span class="summary-label">UNIDADES</span><strong class="summary-value" id="val-units">—</strong></div>
+    <div class="summary-card"><span class="summary-label">REMUNERAÇÃO MENSAL</span><strong class="summary-value" id="val-total">—</strong></div>
+  </div>
   <div class="conditions" style="margin-top:7mm">
     <div class="condition"><b>Forma e data de pagamento</b><p class="edit token">[Preencher]</p></div>
     <div class="condition"><b>Início previsto</b><p class="edit token">[Preencher após aprovação]</p></div>
@@ -288,7 +297,7 @@ body:not(.generated){min-height:100vh;background:var(--navy);color:#f4f6f8}
   <h3 style="margin-top:8mm">Aceite da proposta</h3>
   <p>O aceite abaixo registra a intenção de prosseguir com a contratação nos termos preenchidos e revisados pelas partes. A prestação de serviços começa após a formalização contratual aplicável.</p>
   <div class="signatures">
-<div class="signature"><strong>Michell Patrick S. M.</strong><span class="sign-date">[Data da proposta]</span> — Nome e assinatura do prestador</div>
+<div class="signature"><strong>MP SERVIÇOS</strong><span class="sign-date">[Data da proposta]</span> — Michell Patrick S. M</div>
 <div class="signature"><strong class="sign-rep">[Representante e função]</strong><span class="condo-name">[Nome do condomínio]</span> · <span class="sign-date-condo">[Data da proposta]</span></div>
   </div>
   <div class="contact-card">
@@ -312,6 +321,23 @@ body:not(.generated){min-height:100vh;background:var(--navy);color:#f4f6f8}
   const formatDate = raw => raw ? new Date(raw + 'T12:00:00').toLocaleDateString('pt-BR') : '[Data a definir]';
   const money = raw => Number(raw).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
 
+  // 1. Recuperar dados salvos ao carregar a página
+  const loadSavedData = () => {
+    const saved = localStorage.getItem('mp_proposta');
+    if (!saved) return;
+    try {
+      const data = JSON.parse(saved);
+      for (const [id, val] of Object.entries(data)) {
+        const el = document.getElementById(id);
+        if (el) {
+          if (el.type === 'checkbox') el.checked = val;
+          else el.value = val;
+        }
+      }
+    } catch(e) { console.error('Erro ao carregar dados salvos', e); }
+  };
+  loadSavedData();
+
   form.addEventListener('submit', event => {
     event.preventDefault();
     const selected = [0,1,2].map(i => document.getElementById(`service-${i}`).checked);
@@ -322,10 +348,21 @@ body:not(.generated){min-height:100vh;background:var(--navy);color:#f4f6f8}
         document.getElementById(`fee-${i}`).focus(); return;
       }
     }
+
+    // Salvar no localStorage
+    const formData = {};
+    $$('input, textarea', form).forEach(el => {
+      if (el.id) {
+        formData[el.id] = el.type === 'checkbox' ? el.checked : el.value;
+      }
+    });
+    localStorage.setItem('mp_proposta', JSON.stringify(formData));
+
     const condo = fallback('condo');
     const rep = fallback('representative');
     const date = formatDate(value('proposal-date'));
     const city = fallback('city','Manaus/AM');
+    const units = value('units') ? Number(value('units')) : 0;
 
     text($('.cover-client strong', pages[0]), condo);
     text($('.cover-meta .edit', pages[0]), `${city} · ${date}`);
@@ -339,7 +376,7 @@ body:not(.generated){min-height:100vh;background:var(--navy);color:#f4f6f8}
     text(details[3], date);
 
     $$('.service', pages[2]).forEach((service,i) => {
-      text($('.service-mark',service), selected[i] ? '✓' : '');
+      $('.service-mark',service).classList.toggle('is-checked', selected[i]);
       text($('.service small .edit',service), selected[i] ? fallback(`scope-${i}`,'[Escopo a definir com o condomínio]') : 'Não incluído nesta proposta.');
     });
     text($('.note .edit',pages[3]), fallback('deliverables','[Entregas a definir]'));
@@ -348,18 +385,26 @@ body:not(.generated){min-height:100vh;background:var(--navy);color:#f4f6f8}
     for (let i=0;i<3;i++) {
       const row = priceRows[i];
       const amount = document.getElementById(`fee-${i}`).value;
-      text($('.fee-mark',row), selected[i] ? '✓' : '');
+      $('.fee-mark',row).classList.toggle('is-checked', selected[i]);
       text($('.edit-cell',row), selected[i] ? fallback(`period-${i}`) : '—');
       text($('.fee-display',row), selected[i] ? money(amount) : '—');
     }
+    
     const total = selected.reduce((sum,on,i) => sum + (on ? Number(document.getElementById(`fee-${i}`).value || 0) : 0),0);
+    const valUnit = units > 0 ? total / units : 0;
+
+    text($('#val-unit', pages[4]), units > 0 ? money(valUnit) : '—');
+    text($('#val-units', pages[4]), units > 0 ? units : '—');
+    text($('#val-total', pages[4]), money(total));
+
     const grouped = {};
     for (let i=0;i<3;i++) if (selected[i]) {
       const period = fallback(`period-${i}`,'Periodicidade a definir');
       grouped[period] = (grouped[period] || 0) + Number(document.getElementById(`fee-${i}`).value || 0);
     }
-    text($('#total',pages[4]), Object.entries(grouped).map(([period,sum]) => `${money(sum)} / ${period}`).join(' · '));
-    text($('.lead',pages[4]), 'Os valores abaixo correspondem às modalidades selecionadas e estão agrupados por periodicidade.');
+    const groupedText = Object.entries(grouped).map(([period,sum]) => `${money(sum)} / ${period}`).join(' · ');
+    text($('.lead',pages[4]), groupedText ? `Valores agrupados: ${groupedText}` : 'Os valores abaixo correspondem às modalidades selecionadas.');
+    
     const terms = $$('.condition p',pages[4]);
     ['payment','start-date','validity','expenses'].forEach((id,i) => text(terms[i],fallback(id)));
 
@@ -381,8 +426,13 @@ body:not(.generated){min-height:100vh;background:var(--navy);color:#f4f6f8}
     window.scrollTo({top:0,behavior:'smooth'});
   });
   $('#print-proposal').addEventListener('click', () => window.print());
+  
   form.addEventListener('reset', () => {
-    setTimeout(() => { document.body.classList.remove('generated'); window.scrollTo({top:0,behavior:'smooth'}); }, 0);
+    localStorage.removeItem('mp_proposta');
+    setTimeout(() => { 
+      document.body.classList.remove('generated'); 
+      window.scrollTo({top:0,behavior:'smooth'}); 
+    }, 0);
   });
 })();
 </script>
